@@ -1,0 +1,2823 @@
+<html lang="fr">
+
+</html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta Tags pour l'aperçu WhatsApp / Réseaux Sociaux (Open Graph) -->
+    <meta property="og:title" content="SL Excellence | Cabinet Autonome par IA">
+    <meta property="og:description" content="Technologie Cabinet 3.0 : Votre téléphone ne sonne plus, votre agenda se remplit seul grâce à l'IA métier.">
+    <!-- Le ?v=1.1 force la mise à jour si l'image change -->
+    <meta property="og:image" content="https://emerald-immense-sole-618.mypinata.cloud/ipfs/bafybeidv6ywckvezrtmmzjjkr736aw2s27g6g6vmritevcsj3bqvu25iqa?v=1.1">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://tech.sl-excellence.com">
+    <meta property="og:type" content="website">
+
+    <!-- Meta Tags pour Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://emerald-immense-sole-618.mypinata.cloud/ipfs/bafybeidv6ywckvezrtmmzjjkr736aw2s27g6g6vmritevcsj3bqvu25iqa?v=1.1">
+
+    <!-- Anti-Cache : Force le navigateur à vérifier les mises à jour du site -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <title>SL Excellence | Cabinet Autonome par IA</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #050505; 
+            color: #e6e6e6; 
+            scroll-behavior: smooth;
+        }
+
+        .gold-gradient { 
+            background: linear-gradient(90deg, #d4af37, #f6e27a, #b8860b); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+
+        .bg-card { 
+            background: rgba(15, 15, 15, 0.9); 
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            backdrop-filter: blur(10px); 
+        }
+
+        .btn-gold { 
+            background: linear-gradient(45deg, #b8860b, #f6e27a); 
+            color: black; 
+            font-weight: 700; 
+            transition: all 0.3s ease; 
+        }
+
+        .btn-gold:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6); 
+        }
+
+        /* Style des containers vidéo */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .video-wrapper video {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        /* Animation pulse pour les badges */
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0px rgba(212, 175, 55, 0.4); }
+            100% { box-shadow: 0 0 0 20px rgba(212, 175, 55, 0); }
+        }
+
+        /* L'image de fond fixe (Parallaxe) */
+.global-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10; /* Tout derrière */
+    background-image: url('https://bronze-traditional-smelt-189.mypinata.cloud/ipfs/bafkreiaxhr7ehnaoq7hw7opjfbar63uzct3jsy5sdrg2zmaypthjgcpibi');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Le voile protecteur global (réglé à 50% pour voir l'image) */
+.global-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5; /* Entre l'image et le texte */
+    background: rgba(0, 0, 0, 0.60); /* 55% de noir : assez clair pour voir l'image, assez sombre pour l'Or */
+}
+
+
+/* Force le fond de page en noir pour boucher les micro-espaces entre sections */
+/* Le fond de la page (tout en dessous) est noir pour boucher les trous */
+section, footer {
+    position: relative;
+    background: transparent;
+    margin-top: -2px; /* On augmente à 2px pour être sûr */
+    padding-top: 2px;
+    z-index: 1;
+}
+
+/* On s'assure que rien n'est blanc en dessous */
+html {
+    background-color: #000 !important;
+}
+
+/* Le body doit être TRANSPARENT pour qu'on puisse voir l'image derrière */
+body { 
+    font-family: 'Montserrat', sans-serif; 
+    background-color: transparent !important; 
+    color: #e6e6e6; 
+    scroll-behavior: smooth;
+    margin: 0;
+}
+
+/* Les sections sont transparentes et se chevauchent d'un pixel pour souder les blocs */
+section {
+    position: relative;
+    background: transparent;
+    margin-top: -1px;
+    padding-top: 1px;
+}
+
+
+.whatsapp-sparkle {
+    color: #d4af37; /* Or classique */
+}
+
+.whatsapp-sparkle:hover {
+    color: #f6e27a; /* Or étincelant (plus clair) */
+    text-shadow: 0 0 10px rgba(246, 226, 122, 0.8), 0 0 20px rgba(212, 175, 55, 0.4);
+    transform: scale(1.02);
+    display: inline-block; /* Nécessaire pour l'effet scale */
+}
+
+
+
+
+/* MENU LATÉRAL : Navy Glass Pur */
+#side-menu {
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    width: 350px;
+    z-index: 150;
+    
+    /* Harmonisé avec vos cartes : Navy 30% */
+    background: rgba(2, 12, 27, 0.3) !important; 
+    
+    /* Flou identique au "backdrop-blur-md" de vos sections */
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    
+    /* Bordure identique à vos cartes */
+    border-right: 1px solid rgba(212, 175, 55, 0.3);
+    
+    transform: translateX(-100%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px;
+    box-shadow: 20px 0 50px rgba(0,0,0,0.8);
+    overflow: hidden;
+}
+
+/* Reflet de vitre sur le menu Navy */
+#side-menu::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+#side-menu.open {
+    transform: translateX(0);
+}
+
+
+
+
+
+/* 1. LA BARRE : EFFET OR 24K (Étiquette Cabinet 3.0) */
+/* 1. LA BARRE : Plus fine (2px constant) et éclat maîtrisé */
+/* LA FINE LIGNE DORÉE ÉTINCELANTE */
+.gold-line-premium {
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    left: 0; 
+    top: 0;
+    background: linear-gradient(
+        to bottom, 
+        rgba(138, 102, 40, 0) 0%, 
+        #dfb857 30%, 
+        #ffffff 50%, 
+        #dfb857 70%, 
+        rgba(138, 102, 40, 0) 100%
+    ) !important;
+    box-shadow: 0 0 12px rgba(246, 226, 122, 0.5) !important;
+    animation: gold-deep-pulse 3s infinite alternate ease-in-out;
+}
+
+/* 2. ÉTAT OUVERT : On booste le glow mais PAS l'épaisseur */
+#nav-trigger[style*="translateX(350px)"] .gold-line-premium {
+    width: 2px; /* Reste fin pour ne pas être "gros" */
+    background: linear-gradient(to bottom, #7a5a00, #f3d98b, #f6e27a, #f3d98b, #7a5a00);
+    filter: brightness(1.3) contrast(1.1);
+    box-shadow: 
+        0 0 15px rgba(246, 226, 122, 0.6), 
+        0 0 30px rgba(212, 175, 55, 0.4),
+        -5px 0 40px rgba(212, 175, 55, 0.3);
+}
+
+/* 3. LE TEXTE : Taille réduite (12px) et Graisse affinée */
+/* LE TEXTE : Exactement comme ton modèle nickel */
+/* TEXTE VERTICAL "EXPLORE NETWORK" : OR PUR BRILLANT 24K SANS AUCUN REFLET KAKI */
+.gold-text-premium {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    
+    /* 1. Dégradé ultra-lumineux : QUE des tons or clair et blanc pur (aucun marron/kaki) */
+    background: linear-gradient(
+        to top, 
+        #e5b842 0%, 
+        #fff9d1 30%, 
+        #ffffff 50%, 
+        #fff9d1 70%, 
+        #e5b842 100%
+    ) !important;
+    background-size: 100% 100% !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    display: inline-block;
+
+    /* 2. DOUBLE AURA DORÉE : Repousse le noir et élimine les pixels ternes */
+    filter: drop-shadow(0 0 6px rgba(246, 226, 122, 0.9)) 
+            drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)) !important;
+            
+    /* Force le rendu net des lettres */
+    -webkit-font-smoothing: antialiased;
+}
+
+@keyframes gold-glimmer {
+    /* 0% : On voit le haut (OR) */
+    0% { background-position: 0% 0%; }
+    /* 50% : Le centre du dégradé (BLANC) passe sur le texte */
+    50% { background-position: 0% 100%; }
+    /* 100% : Retour au haut (OR) */
+    100% { background-position: 0% 0%; }
+}
+
+
+
+/* Le conteneur (la barre noire dégradée) */
+.nav-trigger-bar {
+    background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 100%);
+    position: relative;
+    padding-left: 20px;
+}
+
+/* Le fil d'or animé */
+.gold-line-premium {
+    width: 2px; height: 100%; position: absolute; left: 0; top: 0;
+    background: linear-gradient(to bottom, rgba(94,65,0,0) 0%, #8a6d3b 20%, #d4af37 50%, #8a6d3b 80%, rgba(94,65,0,0) 100%);
+    animation: gold-deep-pulse 3s infinite alternate ease-in-out;
+}
+
+@keyframes gold-deep-pulse {
+    0% { box-shadow: 0 0 5px rgba(138,109,59,0.4); opacity: 0.6; }
+    100% { box-shadow: 0 0 15px rgba(212,175,55,0.7); opacity: 1; }
+}
+
+
+
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg); /* Sens de lecture inversé */
+    white-space: nowrap;
+}
+
+.text-gold-bright {
+    background: linear-gradient(90deg, #d4af37, #f6e27a, #b8860b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-link-item {
+    transition: all 0.4s ease;
+    border-left: 0px solid #f6e27a;
+}
+
+.nav-link-item:hover {
+    padding-left: 20px;
+    border-left: 4px solid #f6e27a;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.8));
+}
+
+.gold-bar {
+    background: linear-gradient(90deg, #d4af37, #f6e27a);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* BOUTON FERMER (CROIX) DANS LE MENU */
+.menu-close-btn {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    color: #f6e27a;
+    cursor: pointer;
+    z-index: 200;
+    transition: all 0.3s ease;
+}
+
+.menu-close-btn:hover {
+    transform: rotate(90deg) scale(1.2);
+    filter: drop-shadow(0 0 10px #f6e27a);
+}
+
+
+
+/* --- ANIMATIONS --- */
+@keyframes gold-breathe {
+    0% { box-shadow: 0 0 5px rgba(138, 109, 59, 0.3); opacity: 0.7; }
+    100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); opacity: 1; }
+}
+
+@keyframes gold-extreme-shimmer {
+    0% { filter: brightness(1.2) contrast(1.1); }
+    100% { filter: brightness(1.8) contrast(1.4); }
+}
+
+@keyframes gold-glimmer {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 0% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+.top-fade-overlay {
+    position: fixed; /* On le passe en fixed pour qu'il reste sous la nav au début */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250px; /* Réduit un peu pour une transition plus nette */
+    /* On utilise la couleur exacte de ton overlay global #faf9f6 */
+    background: linear-gradient(to bottom, 
+        rgba(250, 249, 246, 1) 0%, 
+        rgba(250, 249, 246, 1) 40%, /* Reste opaque sur toute la hauteur de la nav */
+        rgba(250, 249, 246, 0) 100%);
+    z-index: 40; /* Juste en dessous de la nav (50) mais au dessus du contenu */
+    pointer-events: none;
+}
+
+/* LANGUAGE SELECTOR STYLES */
+#language-selector { transition: all 0.5s ease; }
+#language-selector:hover i { transform: rotate(20deg); color: #f6e27a; }
+.skiptranslate { display: none !important; }
+body { top: 0px !important; }
+
+
+/* Bouton d'activation du son */
+.sound-toggle {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: #f6e27a;
+    padding: 8px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.sound-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(212, 175, 55, 0.2);
+}
+
+/* Style pour les vidéos verticales (Format Téléphone) */
+.video-wrapper-portrait {
+    position: relative;
+    width: 100%;
+    max-width: 320px; /* Largeur d'un téléphone sur PC */
+    margin: 0 auto;   /* Centre le téléphone dans la colonne */
+    aspect-ratio: 9 / 16; /* Format vertical strict */
+    overflow: hidden;
+    border-radius: 2rem; /* Bordure plus arrondie pour faire "smartphone" */
+    border: 6px solid rgba(255, 255, 255, 0.1); /* Simulation du bord du tel */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    background: #000;
+}
+
+.video-wrapper-portrait video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Remplira parfaitement le cadre 9:16 */
+}
+
+/* --- GESTION DU RESPONSIVE --- */
+
+@media (max-width: 767px) {
+    /* 1. ON SUPPRIME TOTALEMENT LA BARRE PC ET SON FOND NOIR */
+    #nav-trigger { 
+        display: none !important; 
+        pointer-events: none !important; 
+    }
+    
+    /* 2. BOUTON HAMBURGER AU DESSUS DE TOUT (Z-INDEX MAX) */
+    .mobile-nav-btn { 
+        display: block !important; 
+        z-index: 2000 !important; /* Priorité absolue */
+    }
+
+    /* 3. LA PLANÈTE AUSSI (MAIS UN PEU MOINS QUE LE MENU OUVERT) */
+    #language-selector {
+        z-index: 1000 !important;
+    }
+
+    /* 4. LE MENU LATÉRAL DOIT ÊTRE ENTRE LE HAMBURGER ET LE RESTE */
+    #side-menu {
+        z-index: 1500 !important;
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 768px) {
+    #nav-trigger { display: flex !important; }
+    .mobile-nav-btn { display: none !important; }
+}
+
+
+.global-overlay {
+    pointer-events: none !important; /* Laisse passer les clics à travers le voile noir */
+}
+/* BOUTON D'APPEL : Style unique et prioritaire */
+.vapi-btn-trigger {
+    /* 1. POSITIONNEMENT (Crucial pour iPhone) */
+    position: relative !important;
+    z-index: 9999 !important; /* On monte à 9999 pour être au-dessus du "bouclier" de l'agenda */
+    cursor: pointer !important;
+
+    /* 2. COMPORTEMENT MOBILE */
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    outline: none !important;
+    -webkit-appearance: none; /* Supprime le style par défaut de Safari */
+}
+
+/* Empêche de sélectionner le texte à l'intérieur */
+.vapi-btn-trigger .vapi-btn-text {
+    pointer-events: none !important; 
+}
+
+/* État actif (Appel en cours) */
+.vapi-btn-trigger.active-call {
+    border-color: #ff0000 !important;
+    background: rgba(255, 0, 0, 0.3) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6) !important;
+}
+
+
+/* Modifie ou ajoute ceci dans ton bloc <style> */
+#header-calendar-scroll {
+    height: 390px; 
+    overflow: hidden; 
+    position: relative; 
+    background: #fff;
+    /* AJOUTE CETTE LIGNE CI-DESSOUS */
+    overscroll-behavior: contain !important; 
+}
+    </style>
+
+<!-- LANGUAGE SWITCHER (TOP RIGHT - HOVER VERSION) -->
+<!-- LANGUAGE SWITCHER (TOP RIGHT - VERSION OR 24K ÉCLATANT) -->
+<div id="language-selector" class="fixed right-6 top-6 z-[700] group hidden md:block">
+    <div class="relative p-3 rounded-full bg-[#020c1b]/70 backdrop-blur-xl border border-[#f6e27a]/60 cursor-pointer shadow-[0_0_15px_rgba(246,226,122,0.3)] transition-all duration-500 hover:border-[#f6e27a] hover:shadow-[0_0_25px_rgba(246,226,122,0.6)] hover:scale-105">
+        <i data-feather="globe" class="w-6 h-6 text-[#f6e27a] filter drop-shadow-[0_0_8px_rgba(246,226,122,0.8)]"></i>
+        
+        <!-- Menu déroulant -->
+        <div class="absolute right-0 mt-4 w-44 bg-[#020c1b]/95 backdrop-blur-2xl border border-[#f6e27a]/40 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.9)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500">
+            <div class="flex flex-col py-2">
+                <button onclick="changeLanguage('en')" class="px-4 py-3 text-left text-[11px] font-black uppercase text-white hover:text-[#000] hover:bg-[#f6e27a] transition-all">🇬🇧 English</button>
+                <button onclick="changeLanguage('es')" class="px-4 py-3 text-left text-[11px] font-black uppercase text-white hover:text-[#000] hover:bg-[#f6e27a] border-t border-white/5 transition-all">🇪🇸 Español</button>
+                <button onclick="changeLanguage('fr')" class="px-4 py-3 text-left text-[11px] font-black uppercase text-white hover:text-[#000] hover:bg-[#f6e27a] border-t border-white/5 transition-all">🇫🇷 Français</button>
+                <button onclick="changeLanguage('it')" class="px-4 py-3 text-left text-[11px] font-black uppercase text-white hover:text-[#000] hover:bg-[#f6e27a] border-t border-white/5 transition-all">🇮🇹 Italiano</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hidden Google Element -->
+<div id="google_translate_element" style="display:none"></div>
+
+<!-- TRIGGER VERTICAL LUXE -->
+<!-- TRIGGER VERTICAL LUXE (FONDU INVISIBLE SANS BORDURE NETTE) -->
+<div id="nav-trigger" onclick="toggleMenu()" class="fixed left-0 top-0 h-full w-16 z-[120] flex items-center justify-center cursor-pointer group">
+    
+    <!-- DÉGRADÉ ULTRA-PROGRESSIF : Fini la barre nette sur la vidéo -->
+    <div class="absolute inset-y-0 left-0 w-64 pointer-events-none -z-10" 
+         style="background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.15) 70%, transparent 100%);">
+    </div>
+
+    <!-- La barre avec l'aura pulsante -->
+    <div class="absolute left-0 top-0 h-full gold-line-premium"></div>
+    
+    <!-- Texte Explore Network (Or pur & net) -->
+    <div id="trigger-content" class="flex flex-col items-center gap-10 transition-all duration-700">
+        <span class="vertical-text gold-text-premium text-[12px] tracking-[0.8em] uppercase">
+            Explore Network
+        </span>
+        <div class="text-[#f6e27a] filter drop-shadow(0 0 10px #d4af37)">
+            <i data-feather="chevron-right" class="w-6 h-6 animate-bounce"></i>
+        </div>
+    </div>
+</div>
+
+<!-- MENU LATÉRAL -->
+<div id="side-menu" style="overflow: visible !important;"> <!-- IMPORTANT: overflow visible pour voir le menu langue -->
+    
+    <!-- 🌍 PLANÈTE MOBILE (Top Gauche du menu ouvert) -->
+    <div class="md:hidden absolute top-6 left-6 group">
+        <div class="relative p-3 rounded-full bg-white/5 border border-[#d4af37]/30 cursor-pointer transition-all duration-500 hover:border-[#d4af37]">
+            <i data-feather="globe" class="w-6 h-6 text-[#d4af37]"></i>
+            
+            <!-- Sous-menu des langues -->
+            <div class="absolute left-0 mt-4 w-40 bg-[#020c1b]/95 backdrop-blur-xl border border-[#d4af37]/30 rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-500 translate-y-2 group-hover:translate-y-0 shadow-2xl z-[5000]">
+                <div class="flex flex-col py-2">
+                    <button onclick="changeLanguage('en')" class="px-4 py-3 text-left text-[10px] font-black text-white uppercase hover:bg-[#d4af37]/20">🇬🇧 English</button>
+                    <button onclick="changeLanguage('es')" class="px-4 py-3 text-left text-[10px] font-black text-white uppercase border-t border-white/5 hover:bg-[#d4af37]/20">🇪🇸 Español</button>
+                    <button onclick="changeLanguage('fr')" class="px-4 py-3 text-left text-[10px] font-black text-white uppercase border-t border-white/5 hover:bg-[#d4af37]/20">🇫🇷 Français</button>
+                    <button onclick="changeLanguage('it')" class="px-4 py-3 text-left text-[10px] font-black text-white uppercase border-t border-white/5 hover:bg-[#d4af37]/20">🇮🇹 Italiano</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ❌ BOUTON FERMER (Top Droite du menu ouvert) -->
+    <div class="menu-close-btn" onclick="toggleMenu()">
+        <i data-feather="x" class="w-8 h-8"></i>
+    </div>
+    <!-- LOGO PLUS GROS ET REMONTÉ -->
+    <div class="mb-8 mt-4 flex justify-center">
+        <img src="https://bronze-traditional-smelt-189.mypinata.cloud/ipfs/bafkreifvysw73olmyyg4xk2cy3rdjrzj2xiiuqeaj2dqrrm3ep25ifceo4" 
+             class="h-40 w-auto drop-shadow-[0_0_20px_rgba(212,175,55,0.5)]" alt="SL Excellence">
+    </div>
+
+    <!-- NAVIGATION : GAP RÉDUIT POUR TOUT REMONTER -->
+    <nav class="flex flex-col gap-8">
+        <!-- ITEM 1 -->
+        <a href="https://sl-excellence.com" class="nav-link-item group">
+            <span class="text-gold-bright text-[10px] uppercase tracking-[0.4em] block mb-1 opacity-80">Global Network</span>
+            <span class="text-white text-2xl font-black uppercase tracking-tighter group-hover:text-[#f6e27a] transition-colors">Main Home</span>
+        </a>
+
+        <!-- ITEM 2 -->
+        <a href="https://tech.sl-excellence.com" class="nav-link-item group">
+            <span class="text-gold-bright text-[10px] uppercase tracking-[0.4em] block mb-1 opacity-80">Automation</span>
+            <span class="text-white text-2xl font-black uppercase tracking-tighter group-hover:text-[#f6e27a] transition-colors">TECH & AUTOMATION</span>
+        </a>
+
+        <!-- ITEM 3 -->
+        <a href="https://health.sl-excellence.com" class="nav-link-item group">
+            <span class="text-gold-bright text-[10px] uppercase tracking-[0.4em] block mb-1 opacity-80">Elite Lifestyle</span>
+            <span class="text-white text-2xl font-black uppercase tracking-tighter group-hover:text-[#f6e27a] transition-colors">HEALTH & HOSPITALITY</span>
+        </a>
+
+        <!-- ITEM 4 -->
+        <a href="https://finance.sl-excellence.com" class="nav-link-item group">
+            <span class="text-gold-bright text-[10px] uppercase tracking-[0.4em] block mb-1 opacity-80">Wealth Management</span>
+            <span class="text-white text-2xl font-black uppercase tracking-tighter group-hover:text-[#f6e27a] transition-colors">Financial Engineering</span>
+        </a>
+    </nav>
+
+    <!-- FOOTER DU MENU : PT RÉDUIT POUR ÉVITER LA COUPE -->
+    <div class="mt-auto pt-6 border-t border-[#d4af37]/30 text-center">
+        <p class="text-gold-bright text-[11px] uppercase tracking-[0.3em] font-black italic">SL Excellence Group</p>
+    </div>
+</div>
+
+
+   
+</head>
+<body class="antialiased">
+    
+    <!-- Fond et Voile Global (Apparaissent une seule fois ici) -->
+    <div class="global-bg"></div>
+    <div class="global-overlay"></div>
+
+    <!-- BOUTON HAMBURGER (Visible uniquement sur Mobile) -->
+<div class="mobile-nav-btn fixed left-6 top-6 z-[130] md:hidden">
+    <button onclick="toggleMenu(event)" class="p-3 rounded-full bg-[#020c1b]/60 backdrop-blur-md border border-[#d4af37]/30 text-[#f6e27a] shadow-lg">
+        <i data-feather="menu" id="hamburger-icon"></i>
+    </button>
+</div>
+    
+
+    <!-- 1. HERO SECTION -->
+<!-- Changement : pt-6 au lieu de pt-20 pour remonter tout le bloc -->
+<!-- ==========================================
+     HERO SECTION : VERROU STRICT SANS SAUT D'ÉTAPE
+     ========================================== -->
+<style>
+    #hero-fixed-stage {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        background: #000;
+        z-index: 50 !important; /* Dépasse le z-index 40 du voile de ton site */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    
+
+    .hero-bg-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        filter: brightness(1.15) contrast(1.08) saturate(1.1);
+        
+        /* BLOQUE DÉFINITIVEMENT TOUS LES LOGOS / BOUTONS AU SURVOL */
+        pointer-events: none !important;
+        user-select: none !important;
+    }
+
+    .hero-video-vignette {
+        display: none !important;
+    }
+
+    /* Cadre architectural Or transparent */
+    /* 1. CADRE LUXE ÉPURÉ (SANS AUCUN CARRÉ PARASITE) */
+    .gold-wire-card {
+        position: absolute;
+        z-index: 100 !important;
+        background: rgba(2, 12, 27, 0.4) !important; /* Sapphire Glass identique à The Selection */
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 2.5rem 3rem;
+        max-width: 500px;
+        width: 88%;
+        border-radius: 2rem; /* Coins arrondis parfaits */
+        border: 1px solid rgba(246, 226, 122, 0.5) !important; /* Liseré Or pur sur tout le tour */
+        box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.2);
+        
+        opacity: 0;
+        transform: translateY(35px) scale(0.97);
+        pointer-events: none;
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Le ::after responsable du mini-carré a été DÉFINITIVEMENT SUPPRIMÉ */
+
+    /* État affiché et figé */
+    .gold-wire-card.active {
+        opacity: 1 !important;
+        transform: translateY(0) scale(1) !important;
+        pointer-events: auto !important;
+    }
+
+    /* État de sortie vers le haut */
+    .gold-wire-card.exiting {
+        opacity: 0 !important;
+        transform: translateY(-30px) scale(1.02) !important;
+        pointer-events: none !important;
+    }
+
+    /* 2. TITRE OR ÉTINCELANT */
+    .shimmer-gold-title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        background: linear-gradient(
+            135deg, 
+            #d4af37 0%, 
+            #f6e27a 25%, 
+            #ffffff 50%, 
+            #f6e27a 75%, 
+            #b8860b 100%
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine-gold 5s linear infinite;
+        filter: drop-shadow(0px 3px 12px rgba(0, 0, 0, 0.95)) drop-shadow(0px 0px 8px rgba(246, 226, 122, 0.4));
+    }
+
+    /* 3. SOUS-TITRE CHAMPAGNE LUMINEUX */
+    .shimmer-gold-sub {
+        color: #fff2a1;
+        filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.9));
+    }
+
+    /* =======================================================
+       4. LE VRAI BOUTON OR ÉTINCELANT DE "THE SELECTION"
+       ======================================================= */
+    .btn-gold {
+        background: linear-gradient(135deg, #8a6628 0%, #f6e27a 30%, #fff9d1 50%, #f6e27a 70%, #8a6628 100%) !important;
+        background-size: 200% auto !important;
+        color: #000 !important;
+        font-weight: 900 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.2em !important;
+        transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        border: none !important;
+        animation: shine-gold 5s linear infinite !important;
+        box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3) !important;
+        position: relative;
+    }
+
+    .btn-gold:hover {
+        transform: scale(1.05) translateY(-3px) !important;
+        box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6) !important;
+    }
+
+    @keyframes shine-gold {
+        to { background-position: 200% center; }
+    }
+
+
+    @media (max-width: 767px) {
+    .gold-wire-card {
+        top: 15% !important; /* Remonte la carte en haut sur mobile */
+        bottom: auto !important;
+        left: 50% !important;
+        transform: translate(-50%, 20px) scale(0.95) !important;
+        padding: 1.5rem !important;
+        width: 90% !important;
+    }
+    .gold-wire-card.active {
+        transform: translate(-50%, 0) scale(1) !important;
+    }
+}
+</style>
+
+<div id="hero-fixed-stage">
+    
+    <!-- 1. VIDÉO VERSION PC (Paysage) : Visible seulement sur PC (md:block) -->
+    <video class="hero-bg-video hidden md:block" autoplay muted loop playsinline preload="auto" disablePictureInPicture>
+        <source src="https://bronze-traditional-smelt-189.mypinata.cloud/ipfs/bafybeibvinq6ti2zhj2rms4rt3vqslwcooe56ezzn7bolxruisgc3d4wfi" type="video/mp4">
+    </video>
+
+    <!-- 2. VIDÉO VERSION MOBILE (Reel 9:16) : Visible seulement sur Smartphone (md:hidden) -->
+    <video class="hero-bg-video block md:hidden" autoplay muted loop playsinline preload="auto" disablePictureInPicture>
+        <source src="https://bronze-traditional-smelt-189.mypinata.cloud/ipfs/bafybeihwgucq7cc7chinxp5u6jmqqdug2xfvrs4f3y42if33ldymhmdkz4" type="video/mp4">
+    </video>
+
+    <!-- SOUS-SECTION 1 (Centre) -->
+    <div id="step-card-1" class="gold-wire-card text-center">
+        <span class="text-[10px] font-black uppercase tracking-[0.3em] shimmer-gold-sub block mb-2">
+            • Hospitality Content Creator •
+        </span>
+        <h1 class="text-3xl md:text-5xl uppercase tracking-tight mb-4 shimmer-gold-title leading-tight">
+            Cinematic Reels.<br>Direct Bookings.
+        </h1>
+        <p class="text-sm font-medium text-gray-200 leading-relaxed shimmer-gold-sub">
+            Authentic visual storytelling that converts international travelers into high-value reservations.
+        </p>
+    </div>
+
+    <!-- SOUS-SECTION 2 (Bas Droite) -->
+    <div id="step-card-2" class="gold-wire-card right-8 md:right-24 bottom-20 md:bottom-28">
+        <span class="text-[10px] font-black uppercase tracking-[0.3em] shimmer-gold-sub block mb-2">
+            01 / Global Audiences
+        </span>
+        <h2 class="text-2xl md:text-3xl uppercase tracking-tight mb-3 shimmer-gold-title leading-tight">
+            FR • EN • ES Voiceovers
+        </h2>
+        <p class="text-xs font-medium text-gray-200 leading-relaxed shimmer-gold-sub mb-4">
+            One master experience delivered with native voiceovers for European, North American, and Latin markets.
+        </p>
+        <div class="inline-block border-b border-[#d4af37] pb-1 text-[10px] text-[#f6e27a] font-bold uppercase tracking-widest">
+            European & US High-Intent Reach
+        </div>
+    </div>
+
+    <!-- SOUS-SECTION 3 (Haut Gauche) -->
+    <div id="step-card-3" class="gold-wire-card left-8 md:left-24 top-24 md:top-32">
+        <span class="text-[10px] font-black uppercase tracking-[0.3em] shimmer-gold-sub block mb-2">
+            02 / Seamless Delivery
+        </span>
+        <h2 class="text-2xl md:text-3xl uppercase tracking-tight mb-3 shimmer-gold-title leading-tight">
+            Discreet 4K Production
+        </h2>
+        <p class="text-xs font-medium text-gray-200 leading-relaxed shimmer-gold-sub mb-6">
+            Smartphone agility. Zero guest disruption. Turnkey assets ready for organic and paid campaigns.
+        </p>
+        <a href="#offres" class="btn-gold px-8 py-3 rounded-full text-[10px] uppercase font-black tracking-widest inline-block shadow-lg">
+            Explore Packages ↓
+        </a>
+    </div>
+
+    <!-- 3. INDICATEUR DE SCROLL MINIMALISTE -->
+    <div id="scroll-prompt-line" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-40 pointer-events-none flex flex-col items-center gap-2 transition-opacity duration-700">
+        <div class="w-[1.5px] h-10 bg-gradient-to-b from-transparent via-[#f6e27a] to-transparent relative overflow-hidden">
+            <div class="w-full h-1/2 bg-[#ffffff] absolute top-0 animate-[scrollDrop_2s_ease-in-out_infinite]"></div>
+        </div>
+    </div>
+
+    <!-- 4. BOUTON SON LUXE (Placé à droite, cliquable à 100%) -->
+    <button onclick="toggleAudio()" id="hero-audio-btn" class="absolute bottom-8 right-8 z-50 p-3 rounded-full bg-[#020c1b]/60 backdrop-blur-md border border-[#f6e27a]/50 text-[#f6e27a] shadow-[0_0_15px_rgba(246,226,122,0.3)] hover:scale-110 transition-all cursor-pointer">
+        <i data-feather="volume-x" id="audio-icon" class="w-5 h-5"></i>
+    </button>
+
+</div> <!-- Fermeture unique et propre de #hero-fixed-stage -->
+
+<style>
+/* Animation de la goutte de lumière sur la ligne de scroll */
+@keyframes scrollDrop {
+    0% { transform: translateY(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(200%); opacity: 0; }
+}
+
+/* Positionnement optimisé des cartes sur mobile (en haut pour voir le Reel) */
+@media (max-width: 767px) {
+    .gold-wire-card {
+        top: 14% !important;
+        bottom: auto !important;
+        left: 50% !important;
+        transform: translate(-50%, 20px) scale(0.95) !important;
+        padding: 1.5rem 1.8rem !important;
+        width: 90% !important;
+    }
+    .gold-wire-card.active {
+        transform: translate(-50%, 0) scale(1) !important;
+    }
+}
+</style>
+
+<!-- SCRIPT AVEC CONTRÔLE AUDIO + VERROU TEMPOREL ANTI-INERTIE -->
+<script>
+// 1. Fonction Audio
+function toggleAudio() {
+    const videos = document.querySelectorAll('.hero-bg-video');
+    const icon = document.getElementById('audio-icon');
+    
+    videos.forEach(v => {
+        v.muted = !v.muted;
+        if (!v.muted) {
+            v.volume = 1.0;
+            icon.setAttribute('data-feather', 'volume-2');
+        } else {
+            icon.setAttribute('data-feather', 'volume-x');
+        }
+    });
+    if (window.feather) feather.replace();
+}
+
+// 2. Gestionnaire de Scroll par étapes
+(function() {
+    let currentStep = 0;
+    let isTransitioning = false;
+    let isWheelCoasting = false;
+    let coastingTimeout = null;
+
+    const cards = [
+        null,
+        document.getElementById('step-card-1'),
+        document.getElementById('step-card-2'),
+        document.getElementById('step-card-3')
+    ];
+
+    function triggerStep(nextStep) {
+        isTransitioning = true;
+
+        const oldCard = cards[currentStep];
+        if (oldCard) {
+            oldCard.classList.remove('active');
+            oldCard.classList.add('exiting');
+        }
+
+        // Efface la ligne indicatrice dès le 1er scroll
+        const promptLine = document.getElementById('scroll-prompt-line');
+        if (promptLine && nextStep > 0) {
+            promptLine.style.opacity = '0';
+        }
+
+        setTimeout(() => {
+            if (oldCard) oldCard.classList.remove('exiting');
+            currentStep = nextStep;
+            const newCard = cards[currentStep];
+            if (newCard) newCard.classList.add('active');
+
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 650);
+        }, 150);
+    }
+
+    // Molette PC
+    window.addEventListener('wheel', function(e) {
+        if (currentStep === 4 && e.deltaY > 0) return;
+        if (window.scrollY > 20) return;
+
+        if (currentStep < 4) {
+            e.preventDefault();
+        }
+
+        isWheelCoasting = true;
+        clearTimeout(coastingTimeout);
+        coastingTimeout = setTimeout(() => {
+            isWheelCoasting = false;
+        }, 150);
+
+        if (isTransitioning || isWheelCoasting && isTransitioning) {
+            return;
+        }
+
+        if (Math.abs(e.deltaY) < 25) return;
+
+        if (e.deltaY > 0) {
+            if (currentStep < 3 && !isTransitioning) {
+                triggerStep(currentStep + 1);
+            } else if (currentStep === 3 && !isTransitioning) {
+                currentStep = 4;
+                const nextSection = document.getElementById('immersion') || document.querySelector('section');
+                if (nextSection) nextSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else if (e.deltaY < 0 && window.scrollY <= 10) {
+            if (currentStep > 0 && !isTransitioning) {
+                triggerStep(currentStep - 1);
+            }
+        }
+    }, { passive: false });
+
+    // Swipe Mobile Tactile
+    let touchStartY = 0;
+    window.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+        if (currentStep === 4 && window.scrollY > 10) return;
+        if (window.scrollY > 20) return;
+
+        const touchCurrentY = e.touches[0].clientY;
+        const diff = touchStartY - touchCurrentY;
+
+        if (currentStep < 4) {
+            e.preventDefault();
+        }
+
+        if (isTransitioning) return;
+
+        if (Math.abs(diff) > 50) {
+            if (diff > 0 && currentStep < 3) {
+                touchStartY = touchCurrentY;
+                triggerStep(currentStep + 1);
+            } else if (diff > 0 && currentStep === 3) {
+                currentStep = 4;
+                const nextSection = document.getElementById('immersion') || document.querySelector('section');
+                if (nextSection) nextSection.scrollIntoView({ behavior: 'smooth' });
+            } else if (diff < 0 && currentStep > 0 && window.scrollY <= 10) {
+                touchStartY = touchCurrentY;
+                triggerStep(currentStep - 1);
+            }
+        }
+    }, { passive: false });
+})();
+</script>
+
+
+
+
+
+
+
+
+<!-- SECTION IMMERSION : ÉCOSYSTÈME & IA -->
+<section id="immersion" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- En-tête de section -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-black uppercase mb-4 text-white">L'Immersion 3.0</h2>
+            <p class="gold-gradient font-bold uppercase tracking-widest text-sm">Découvrez votre futur environnement de travail</p>
+        </div>
+
+        <!-- Grille principale Vidéos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16 lg:items-center">
+            <!-- Colonne GAUCHE : Site Web -->
+        <div class="space-y-6 lg:flex lg:flex-col lg:justify-center lg:h-full">
+            <div class="video-wrapper">
+                <!-- VIDÉO VERSION PC (Paysage) : Visible seulement sur PC (lg) -->
+                <video controls preload="metadata" class="hidden lg:block w-full h-full object-cover">
+                    <source src="https://gray-fashionable-mongoose-111.mypinata.cloud/ipfs/bafybeiebbmet6gtfgbu4uz3ftqjsds2adu3ab2r2ib6sq37qzwhgfbd4o4" type="video/mp4">
+                </video>
+
+                <!-- VIDÉO VERSION MOBILE (Portrait) : Visible seulement sur Mobile/Tablette, cachée sur PC -->
+                <video controls preload="metadata" class="block lg:hidden w-full h-full object-cover">
+                    <!-- J'ai ajouté #t=0.5 à la fin du lien -->
+                    <source src="https://gray-fashionable-mongoose-111.mypinata.cloud/ipfs/bafybeietbsrlfxybayam6hlzibq5324wjmkgbgurpq5ywbupgigfn4ug6m#t=5" type="video/mp4">
+                </video>
+            </div>
+            <h3 class="text-2xl font-black gold-gradient uppercase tracking-widest text-center">Écosystème Web de Santé</h3>
+            <p class="text-white leading-relaxed text-center text-sm">Un site conçu pour le référencement local (SEO) qui rassure vos futurs patients dès le premier clic.</p>
+        </div>
+
+            <!-- Colonne MILIEU : IA VOCALE SIMPLIFIÉE -->
+            <!-- Colonne MILIEU : IA VOCALE (Lien vers page dédiée) -->
+        <div id="vocal-ia-column" class="space-y-6">
+            <!-- Cadre de l'image -->
+            <a href="pageVenteSimpleColdCall.html" class="block video-wrapper group relative cursor-pointer overflow-hidden border-2 border-[#d4af37]/50 rounded-3xl shadow-2xl">
+                
+                <!-- IMAGE : Plus intense par défaut (brightness-95) -->
+                <!-- Elle devient ÉCLATANTE au survol (brightness-125) -->
+                <img src="https://bronze-traditional-smelt-189.mypinata.cloud/ipfs/bafybeia4fyg3pwaj7j7msrmd25xl7yuvs5bvainhzqnjr5iwfi27flalqy" 
+                    class="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 brightness-95 contrast-105 group-hover:scale-110 group-hover:brightness-125 group-hover:contrast-115" 
+                    alt="Démo IA Vocale">
+                
+                <!-- OVERLAY : Centrage parfait -->
+                <div class="absolute inset-0 flex items-center justify-center bg-transparent group-hover:bg-black/10 transition-all duration-500">
+                    
+                    <!-- BOUTON PLAY : Taille élégante (w-16) -->
+                    <div class="relative flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-[#8a6628] via-[#f6e27a] to-[#8a6628] shadow-[0_0_20px_rgba(212,175,55,0.6)] transition-all duration-500 transform group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(212,175,55,0.9)]">
+                        <svg class="w-6 h-6 text-black fill-current ml-1" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        
+                        <div class="absolute inset-0 rounded-full border-2 border-white/30 animate-ping opacity-0 group-hover:opacity-100"></div>
+                    </div>
+
+                    <!-- Texte qui remonte au survol -->
+                    <div class="absolute bottom-6 w-full text-center">
+                        <span class="text-white font-black uppercase text-[9px] tracking-[0.4em] drop-shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+                            Lancer l'expérience
+                        </span>
+                    </div>
+                </div>
+            </a>
+            
+            <h3 class="text-2xl font-black gold-gradient uppercase tracking-widest text-center">Le Protocole IA Vocal</h3>
+            <p class="text-white leading-relaxed text-center text-sm">Remplacez votre standard téléphonique par une voix humaine indiscernable disponible 24h/24.</p>
+            
+            <div class="text-center">
+                <a href="pageVenteSimpleColdCall.html" class="btn-gold px-8 py-4 rounded-full text-[10px] uppercase tracking-widest inline-block shadow-lg">
+                    Voir la démonstration dédiée
+                </a>
+            </div>
+        </div>
+            
+            <!-- Colonne DROITE : WhatsApp -->
+            <div class="space-y-6">
+                <div class="video-wrapper-portrait relative">
+                    <video id="video-whatsapp" autoplay muted loop playsinline preload="auto">
+                        <source src="https://gray-fashionable-mongoose-111.mypinata.cloud/ipfs/bafybeihkop26ha5vpn5im64dvlcemgbyp7hjcbmjmkr54uhnxv7oeska6m" type="video/mp4">
+                    </video>
+                    <button onclick="toggleSound('video-whatsapp', this)" class="sound-toggle">
+                        <i data-feather="volume-x"></i>
+                    </button>
+                </div>
+                <h3 class="text-2xl font-black gold-gradient uppercase tracking-widest text-center">Assistant WhatsApp</h3>
+                <p class="text-white leading-relaxed text-center text-sm">Gerez les annulations, les reports et les questions fréquentes par écrit, sans aucun effort manuel.</p>
+            </div>
+        </div>
+
+        <!-- Grille des encadrés (Bénéfices IA) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            <!-- Bloc 1 -->
+            <div class="bg-[#020c1b]/30 backdrop-blur-md p-8 rounded-2xl border border-[#d4af37]/30 shadow-xl group">
+                <div class="flex items-start gap-4">
+                    <div class="p-3 bg-[#d4af37]/10 rounded-lg">
+                        <i data-feather="volume-x" class="text-[#d4af37] w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl mb-2 text-white uppercase">Zéro Interruption</h4>
+                        <p class="text-sm text-white leading-relaxed">
+                            L'IA répond pendant que vous êtes en soin. Vos mains restent sur le patient, votre agenda se remplit en silence.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloc 2 -->
+            <div class="bg-[#020c1b]/30 backdrop-blur-md p-8 rounded-2xl border border-[#d4af37]/30 shadow-xl group">
+                <div class="flex items-start gap-4">
+                    <div class="p-3 bg-[#d4af37]/10 rounded-lg">
+                        <i data-feather="user-check" class="text-[#d4af37] w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl mb-2 text-white uppercase">Qualification Intelligente</h4>
+                        <p class="text-sm text-white leading-relaxed">
+                            Elle demande le motif, vérifie vos disponibilités et rappelle les consignes (ordonnance, serviette, etc.).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloc 3 -->
+            <div class="bg-[#020c1b]/30 backdrop-blur-md p-8 rounded-2xl border border-[#d4af37]/30 shadow-xl group">
+                <div class="flex items-start gap-4">
+                    <div class="p-3 bg-[#d4af37]/10 rounded-lg">
+                        <i data-feather="refresh-cw" class="text-[#d4af37] w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl mb-2 text-white uppercase">Synchro Multi-Plateforme</h4>
+                        <p class="text-sm text-white leading-relaxed">
+                            L'IA centralise vos agendas Treatwell, Booksy et Doctoralia en temps réel pour éliminer les doublons.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- IMAGE INFRASTRUCTURE UNIFIÉE -->
+        <div class="pt-12 pb-0 relative z-10 border-t border-white/5">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-black gold-gradient uppercase tracking-widest">Infrastructure Unifiée</h3>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <img src="https://emerald-immense-sole-618.mypinata.cloud/ipfs/bafybeiedwiw4itycezlh5nbtmpib6h47pin3p2fsgbexi4crear7ruzt3a" 
+                     class="w-full rounded-[2.5rem] border-2 border-[#d4af37]/30 shadow-[0_0_50px_rgba(0,0,0,0.5)]" 
+                     alt="Synchronisation Multi-plateforme">
+            </div>
+        </div>
+    </div>
+</section>
+
+   <!-- 4. LES OFFRES (VERSION FINALE UNIFIÉE : 100% NAVY GLASS TRANSPARENT) -->
+<section id="offres" class="pt-10 pb-32 px-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- En-tête -->
+        <div class="text-center mb-20">
+            <h2 class="text-3xl md:text-5xl font-black uppercase mb-4 text-white">Investissez dans votre liberté</h2>
+            <p class="text-xl text-white font-bold mb-2">Divisez vos frais de secrétariat par 12 dès le premier mois.</p>
+            <p class="gold-gradient uppercase tracking-widest text-sm font-bold italic">
+                Une économie moyenne de 14 400 € / an pour votre cabinet.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
+            
+            <!-- PACK 1 : WHATSAPP IA (ADAPTÉ CABINET 3.0) -->
+            <div class="relative bg-[#020c1b]/30 backdrop-blur-md p-10 rounded-3xl flex flex-col border border-[#d4af37]/40 shadow-xl transition-transform hover:scale-[1.02] duration-300">
+                <h3 class="text-xl font-bold mb-2 text-center uppercase text-white">Pack WhatsApp IA</h3>
+                <p class="text-xs text-gray-400 mb-6 uppercase tracking-widest text-center italic">Secrétariat Automatisé</p>
+                <div class="text-5xl font-black mb-2 text-center uppercase text-white">600€</div>
+                <p class="text-[10px] text-[#d4af37] mb-8 font-bold uppercase tracking-widest text-center">Mise en service unique</p>
+                <ul class="space-y-4 text-sm text-gray-200 flex-grow mb-8">
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] flex-shrink-0 drop-shadow-[0_0_3px_rgba(212,175,55,0.4)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Installation Assistant IA WhatsApp</span></li>
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] flex-shrink-0 drop-shadow-[0_0_3px_rgba(212,175,55,0.4)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Numéro dédié inclus</span></li>
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] flex-shrink-0 drop-shadow-[0_0_3px_rgba(212,175,55,0.4)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Sync Agenda temps réel</span></li>
+                </ul>
+                <div class="bg-black/40 p-5 rounded-2xl mb-6 border border-white/10 text-center">
+                    <p class="text-[11px] text-gray-300 italic mb-2">Usage IA illimité + Support</p>
+                    <p class="text-sm font-bold text-[#d4af37]">99€ / mois</p>
+                    <div class="mt-4 pt-3 border-t border-white/5">
+                        <a href="https://bronze-traditional-smelt-189.mypinata.cloud/ipfs/bafybeiemuovn5xz7opoeyl42ggsxu2n67vvbjl6hrcs5m6ypyjm5smanve" target="_blank" class="tech-link inline-flex items-center gap-2 text-[10px] text-gray-300 hover:text-white transition font-bold uppercase tracking-tighter group">
+                            <i data-feather="file-text" class="w-3 h-3 text-[#d4af37]"></i><span class="tech-text">Technical Datasheet</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="https://buy.stripe.com/aFa7sE21t15Vf1DczZ3sI0m" class="btn-gold py-4 rounded-xl text-center text-sm uppercase">Choisir</a>
+            </div>
+
+            <!-- PACK 2 : VITRINE -->
+            <div class="relative bg-[#020c1b]/30 backdrop-blur-md p-10 rounded-3xl flex flex-col border border-[#d4af37]/40 shadow-xl transition-transform hover:scale-[1.02] duration-300">
+                <h3 class="text-xl font-bold mb-2 text-center uppercase text-white">Pack Vitrine</h3>
+                <p class="text-xs text-gray-400 mb-6 uppercase tracking-widest text-center italic">Le Site Web</p>
+                <div class="text-5xl font-black mb-2 text-center uppercase text-white">1400€</div>
+                <p class="text-[10px] text-[#d4af37] mb-8 font-bold uppercase tracking-widest text-center">Design & SEO Inclus</p>
+                <ul class="space-y-4 text-sm text-gray-200 flex-grow mb-8">
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] flex-shrink-0 drop-shadow-[0_0_3px_rgba(212,175,55,0.4)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Site Web "Santé" 3 pages</span></li>
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] flex-shrink-0 drop-shadow-[0_0_3px_rgba(212,175,55,0.4)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Design UX Moderne</span></li>
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] flex-shrink-0 drop-shadow-[0_0_3px_rgba(212,175,55,0.4)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Hébergement & SSL</span></li>
+                </ul>
+                <div class="bg-black/40 p-5 rounded-2xl mb-6 border border-white/10 text-center">
+                    <p class="text-[11px] text-gray-300 italic mb-2">Hébergement & Maintenance</p>
+                    <p class="text-sm font-bold text-[#d4af37]">49€ / mois</p>
+                    <div class="mt-4 pt-3 border-t border-white/5">
+                        <a href="https://bronze-traditional-smelt-189.mypinata.cloud/ipfs/bafybeiemuovn5xz7opoeyl42ggsxu2n67vvbjl6hrcs5m6ypyjm5smanve" target="_blank" class="tech-link inline-flex items-center gap-2 text-[10px] text-gray-300 hover:text-white transition font-bold uppercase tracking-tighter group">
+                            <i data-feather="file-text" class="w-3 h-3 text-[#d4af37]"></i><span class="tech-text">Technical Datasheet</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="https://buy.stripe.com/8x29AMcG75mb8DfdE33sI01" class="bg-white/10 py-4 rounded-xl text-center text-sm uppercase hover:bg-white/20 transition">Choisir</a>
+            </div>
+
+            <!-- PACK 3 : IA VOICE -->
+            <div class="relative bg-[#020c1b]/30 backdrop-blur-md p-10 rounded-3xl flex flex-col border border-[#d4af37]/40 shadow-xl transition-transform hover:scale-[1.02] duration-300">
+                <h3 class="text-xl font-bold mb-2 text-center uppercase text-white">Pack IA Vocal</h3>
+                <p class="text-xs text-gray-400 mb-6 uppercase tracking-widest text-center italic">L'IA Seule</p>
+                <div class="text-5xl font-black mb-2 text-center uppercase text-white">800€</div>
+                <p class="text-[10px] text-[#d4af37] mb-8 font-bold uppercase tracking-widest text-center">Mise en service unique</p>
+                <ul class="space-y-4 text-sm text-gray-200 flex-grow mb-8">
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] flex-shrink-0 drop-shadow-[0_0_3px_rgba(212,175,55,0.4)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Installation IA Vocale</span></li>
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] flex-shrink-0 drop-shadow-[0_0_3px_rgba(212,175,55,0.4)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Numéro dédié inclus</span></li>
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] flex-shrink-0 drop-shadow-[0_0_3px_rgba(212,175,55,0.4)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Sync Agenda temps réel</span></li>
+                </ul>
+                <div class="bg-black/40 p-5 rounded-2xl mb-6 border border-white/10 text-center">
+                    <p class="text-[11px] text-gray-300 italic mb-2">60min d'IA/mois + Maintenance</p>
+                    <p class="text-sm font-bold text-[#d4af37]">99€ / mois</p>
+                    <div class="mt-4 pt-3 border-t border-white/5">
+                        <a href="https://bronze-traditional-smelt-189.mypinata.cloud/ipfs/bafybeiemuovn5xz7opoeyl42ggsxu2n67vvbjl6hrcs5m6ypyjm5smanve" target="_blank" class="tech-link inline-flex items-center gap-2 text-[10px] text-gray-300 hover:text-white transition font-bold uppercase tracking-tighter group">
+                            <i data-feather="file-text" class="w-3 h-3 text-[#d4af37]"></i><span class="tech-text">Technical Datasheet</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="https://buy.stripe.com/aFa9AM5dF5mbg5HfMb3sI0i" class="btn-gold py-4 rounded-xl text-center text-sm uppercase">Choisir</a>
+            </div>
+
+            <!-- PACK 4 : CABINET 3.0 (CORRECT : 100% TRANSPARENT + BORDURE OR) -->
+            <!-- PACK 4 : CABINET 3.0 (ULTIME NAVY GLASS + HOVER DYNAMIQUE) -->
+            <div class="lg:scale-110 z-20 relative pulse rounded-3xl border-2 border-[#d4af37] bg-[#020c1b]/30 backdrop-blur-md p-10 flex flex-col shadow-2xl transition-all duration-300 hover:scale-[1.15] hover:shadow-[0_0_50px_rgba(212,175,55,0.3)]">
+                <!-- Étiquette Offre Limitée Or -->
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#b8860b] via-[#f6e27a] to-[#b8860b] text-black px-6 py-1 text-[10px] font-normal rounded-full uppercase tracking-widest shadow-lg text-center">Offre Limitée</div>
+                
+                <h3 class="text-xl font-black mb-2 gold-gradient uppercase text-center">Cabinet 3.0</h3>
+                <p class="text-xs text-gray-400 mb-6 uppercase tracking-widest text-center italic">L'Infrastructure Complète</p>
+                
+                <div class="text-5xl font-black mb-2 text-center uppercase text-white">1800€</div>
+                <!-- Prix barré en Or -->
+                <p class="text-xs line-through decoration-[#d4af37] decoration-2 text-[#d4af37] mb-8 font-bold uppercase tracking-widest text-center">Valeur réelle : 2600€</p>
+                
+                <ul class="space-y-4 text-sm text-white flex-grow mb-8 font-medium">
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] fill-current flex-shrink-0 drop-shadow-[0_0_5px_rgba(212,175,55,0.6)]" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><span>Tout le Pack IA Vocale</span></li>
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] fill-current flex-shrink-0 drop-shadow-[0_0_5px_rgba(212,175,55,0.6)]" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><span>Tout le Pack Growth</span></li>
+                    <li class="flex gap-3 items-start"><svg class="w-5 h-5 text-[#d4af37] fill-current flex-shrink-0 drop-shadow-[0_0_5px_rgba(212,175,55,0.6)]" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><span>Intégration WhatsApp IA</span></li>
+                    <li class="flex gap-3 items-start">
+                    <svg class="w-5 h-5 text-[#d4af37] fill-current flex-shrink-0 drop-shadow-[0_0_5px_rgba(212,175,55,0.6)]" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    <span>Passerelle intégrale multi-plateforme (Architecture zéro doublon)</span>
+                </li>
+                </ul>
+
+                <div class="text-center mb-6 pt-4 border-t border-white/10">
+                    <p class="text-[11px] text-[#d4af37] font-bold uppercase tracking-widest mb-2">Support & IA : 148€/mois</p>
+                    <div class="mt-4 pt-3 border-t border-white/5">
+                        <a href="https://bronze-traditional-smelt-189.mypinata.cloud/ipfs/bafybeiemuovn5xz7opoeyl42ggsxu2n67vvbjl6hrcs5m6ypyjm5smanve" target="_blank" class="tech-link inline-flex items-center gap-2 text-[10px] text-gray-300 hover:text-white transition font-bold uppercase tracking-tighter group">
+                            <i data-feather="file-text" class="w-3 h-3 text-[#d4af37]"></i><span class="tech-text">Technical Datasheet</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="https://buy.stripe.com/28E14gbC35mbdXzbvV3sI06" class="btn-gold py-5 rounded-xl text-center text-sm uppercase shadow-lg">Déployer mon cabinet</a>
+            </div>
+        </div>
+
+        <!-- BANDEAU AMBASSADEUR -->
+        <div class="mt-24 max-w-4xl mx-auto bg-[#020c1b]/30 backdrop-blur-md p-8 rounded-3xl border border-[#d4af37]/30 text-center shadow-2xl">
+            <h4 class="text-xl font-bold gold-gradient uppercase mb-4">Devenez Ambassadeur SL Excellence</h4>
+            <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                Vous êtes convaincu par l'IA Excellence ? Partagez votre expérience avec vos confrères. <br class="hidden md:block">
+                Pour chaque cabinet équipé sur votre recommandation, bénéficiez d'un <span class="text-white font-bold">mois de service offert</span> et faites profiter votre confrère d'une <span class="text-[#d4af37] font-bold">remise exclusive de 100€</span> sur son installation.
+            </p>
+            <a href="#faq-parrainage" class="inline-flex items-center gap-2 text-[#d4af37] font-bold text-xs uppercase underline tracking-widest hover:text-white transition">
+                <i data-feather="users" class="w-4 h-4"></i> En savoir plus
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 5. SECTION TÉMOIGNAGES (CORRECTE : TITRE SYNCHRO + JUSTE BORDURE OR + TRANSPARENT) -->
+<section id="testimonial" class="py-24 px-6 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Titre synchronisé avec tes autres sections (Magic Moment, Offres...) -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-black uppercase mb-4 text-white">L'Excellence validée</h2>
+            <p class="gold-gradient font-bold uppercase tracking-widest text-sm">Ce que vos confrères disent de leur passage à l'ère du Cabinet 3.0</p>
+        </div>
+
+        <!-- LE CADRE : Uniquement une bordure (border-2) de couleur Or (#d4af37) -->
+        <!-- Fond réglé à 30% d'opacité pour voir ton image de fond Pinata -->
+        <div id="testimonial-box" class="max-w-4xl mx-auto rounded-[2rem] border-2 border-[#d4af37]/60 bg-[#020c1b]/30 backdrop-blur-md p-10 md:p-16 text-center relative overflow-hidden shadow-[0_0_20px_rgba(212,175,55,0.1)]">
+            
+            <!-- Flash doré de transition (uniquement lors du changement de texte) -->
+            <div id="testimonial-flash" class="absolute inset-0 bg-gradient-to-r from-[#b8860b] to-[#f6e27a] opacity-0 z-20 transition-all duration-500 pointer-events-none"></div>
+
+            <!-- Étoiles Or -->
+            <div id="testimonial-stars" class="mb-8 flex justify-center gap-1 drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]"></div>
+
+            <!-- Texte du témoignage (Ultra lisible sur le Navy transparent) -->
+            <blockquote id="testimonial-text" class="text-xl md:text-3xl font-light text-white italic mb-10 leading-relaxed min-h-[150px] flex items-center justify-center relative z-30">
+                "Chargement des témoignages..."
+            </blockquote>
+
+            <!-- Auteur -->
+            <div class="flex flex-col items-center relative z-30">
+                <div class="w-20 h-20 mb-4 rounded-full p-0.5 bg-[#d4af37]">
+                    <img id="testimonial-avatar" src="" alt="Avatar" class="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+                <p id="testimonial-author" class="font-bold text-white uppercase tracking-widest text-sm"></p>
+                <p id="testimonial-specialty" class="text-[#d4af37] text-xs uppercase mt-1 font-black tracking-widest"></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- 6. FAQ (VERSION LUXE : NAVY GLASS + BORDURES OR + GLOW DYNAMIQUE) -->
+<section class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-black text-center mb-16 uppercase text-white">Questions Fréquentes</h2>
+        <div class="space-y-6">
+            
+            <!-- Question sur l'abonnement -->
+            <details class="group bg-[#020c1b]/30 backdrop-blur-md p-6 rounded-2xl border border-[#d4af37]/30 cursor-pointer transition-all duration-300 hover:border-[#d4af37]/60 hover:scale-[1.02]">
+                <summary class="font-bold flex justify-between items-center uppercase text-sm text-white">
+                    Pourquoi y a-t-il un abonnement mensuel ? 
+                    <i data-feather="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <div class="mt-4 text-gray-400 text-sm space-y-3">
+                    <p>L'abonnement de 99€ couvre les frais de fonctionnement réels de votre infrastructure :</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>Télécom :</strong> Ligne dédiée 24h/7j.</li>
+                        <li><strong>Puissance IA :</strong> Accès aux serveurs GPU haute performance.</li>
+                        <li><strong>Mises à jour :</strong> Évolution constante des algorithmes.</li>
+                        <li><strong>Sécurité :</strong> Monitoring en temps réel.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- Question : Rentabilité / ROI -->
+            <details class="group bg-[#020c1b]/30 backdrop-blur-md p-6 rounded-2xl border border-[#d4af37]/30 cursor-pointer transition-all duration-300 hover:border-[#d4af37]/60 hover:scale-[1.02]">
+                <summary class="font-bold flex justify-between items-center uppercase text-sm text-white">
+                    Comment l'IA s'autofinance-t-elle ?
+                    <i data-feather="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <div class="mt-4 text-gray-400 text-sm">
+                    <p>En redirigeant vos clients réguliers des plateformes à commissions élevées (Treatwell/Booksy) vers votre WhatsApp direct. Avec <strong>0 % de commission</strong> sur ces réservations, le système est rentabilisé après seulement 5 à 7 rendez-vous chaque mois.</p>
+                </div>
+            </details>
+
+            <!-- Question sur le Parrainage (EFFET NÉON VIBRANT) -->
+            <details id="faq-parrainage" class="group bg-[#020c1b]/30 backdrop-blur-md p-6 rounded-2xl border-2 border-[#d4af37] cursor-pointer shadow-[0_0_25px_rgba(212,175,55,0.2)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)]">
+                <summary class="font-bold flex justify-between items-center uppercase text-sm gold-gradient">
+                    Proposez-vous un programme de parrainage ? <i data-feather="chevron-down" class="text-yellow-500"></i>
+                </summary>
+
+                <div class="mt-4 text-gray-300 text-sm leading-relaxed">
+                    <p class="mb-4 text-white font-semibold italic">"Nous récompensons l'excellence qui se partage."</p>
+                    <p>Via notre <span class="text-[#d4af37] font-bold uppercase">Programme Ambassadeur</span> :</p>
+                    <ul class="mt-4 space-y-3">
+                        <li class="flex gap-3 items-start"><i data-feather="gift" class="text-[#d4af37] w-5 h-5 flex-shrink-0"></i><span><strong class="text-white">Pour vous :</strong> 1 mois d'abonnement <span class="text-[#d4af37] font-bold uppercase">offert</span>.</span></li>
+                        <li class="flex gap-3 items-start"><i data-feather="user-plus" class="text-[#d4af37] w-5 h-5 flex-shrink-0"></i><span><strong class="text-white">Pour votre confrère :</strong> Remise de <span class="text-[#d4af37] font-bold uppercase">100€</span>.</span></li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- Question Partenaire -->
+            <details id="faq-partenaire" class="group bg-[#020c1b]/30 backdrop-blur-md p-6 rounded-2xl border border-[#d4af37]/30 cursor-pointer transition-all duration-300 hover:border-[#d4af37]/60 hover:scale-[1.02]">
+                <summary class="font-bold flex justify-between items-center uppercase text-sm text-white">
+                    Je ne suis pas professionnel de santé, puis-je recommander vos services ? <i data-feather="chevron-down"></i>
+                </summary>
+                <div class="mt-4 text-gray-400 text-sm">
+                    <p class="mb-3">Absolument. Nous avons un <strong>Programme Partenaire</strong> dédié.</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-4">
+                        <li><strong>100€ de commission</strong> par installation.</li>
+                        <li><strong>10€ de rente mensuelle</strong> par client actif.</li>
+                    </ul>
+                    <a href="partenaires.html" class="inline-block bg-white/10 px-4 py-2 rounded-lg text-[#d4af37] font-bold hover:bg-white/20 transition text-xs uppercase tracking-widest">
+                        Consulter les conditions →
+                    </a>
+                </div>
+            </details>
+
+            <!-- Question Doctolib -->
+            <details class="group bg-[#020c1b]/30 backdrop-blur-md p-6 rounded-2xl border border-[#d4af37]/30 cursor-pointer transition-all duration-300 hover:border-[#d4af37]/60 hover:scale-[1.02]">
+                <summary class="font-bold flex justify-between items-center uppercase text-sm text-white">Est-ce compatible avec Doctolib ? <i data-feather="chevron-down" class="group-open:rotate-180 transition"></i></summary>
+                <p class="mt-4 text-gray-400 text-sm">L'IA se synchronise avec Google Calendar et Outlook, compatibles avec la majorité des outils métiers via Zapier ou Make.</p>
+            </details>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- SECTION SÉCURITÉ & CONFORMITÉ MÉDICALE -->
+<section class="py-20 px-6">
+    <div class="max-w-5xl mx-auto bg-[#020c1b]/50 backdrop-blur-md p-10 rounded-[2.5rem] border border-blue-500/20 shadow-2xl">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-black uppercase tracking-widest text-white">Standard de Sécurité Médical</h2>
+            <div class="h-1 w-20 bg-[#d4af37] mx-auto mt-4"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <!-- Item 1 -->
+            <div class="space-y-4">
+                <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto border border-blue-500/30">
+                    <i data-feather="shield" class="text-blue-400 w-8 h-8"></i>
+                </div>
+                <h4 class="font-bold text-white uppercase text-sm">Hébergement HDS</h4>
+                <p class="text-xs text-gray-400 leading-relaxed">Données stockées sur des serveurs certifiés "Hébergeur de Données de Santé" (HDS) en France.</p>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="space-y-4">
+                <div class="w-16 h-16 bg-[#d4af37]/10 rounded-full flex items-center justify-center mx-auto border border-[#d4af37]/30">
+                    <i data-feather="lock" class="text-[#d4af37] w-8 h-8"></i>
+                </div>
+                <h4 class="font-bold text-white uppercase text-sm">Confidentialité Totale</h4>
+                <p class="text-xs text-gray-400 leading-relaxed">Conformité RGPD stricte. Les échanges sont cryptés et l'IA respecte le secret médical.</p>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="space-y-4">
+                <div class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto border border-green-500/30">
+                    <i data-feather="check-square" class="text-green-400 w-8 h-8"></i>
+                </div>
+                <h4 class="font-bold text-white uppercase text-sm">Zéro Erreur</h4>
+                <p class="text-xs text-gray-400 leading-relaxed">Algorithme entraîné sur des milliers de motifs de consultation pour une précision chirurgicale.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- 7. FOOTER MODIFIÉ -->
+<!-- 7. FOOTER AVEC DÉGRADÉ INVERSÉ -->
+<footer class="py-20 text-center" 
+        style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); margin-top: -2px;">
+    <div class="max-w-7xl mx-auto px-6">
+        
+        <p class="text-xl font-bold gold-gradient mb-8 uppercase tracking-widest italic">
+            L'expertise d'un soignant, la puissance de l'IA.
+        </p>
+        
+        <!-- Navigation Discrète -->
+        <!-- Dans le Footer, remplace la ligne de navigation par celle-ci -->
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-10 text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold">
+            <a href="#offres" class="hover:text-white transition">Nos Offres</a>
+            <a href="#faq" class="hover:text-white transition">Questions Fréquentes</a>
+            <!-- Lien vers l'onglet Parrainage -->
+            <a href="#faq-parrainage" class="hover:text-[#d4af37] transition border-b border-transparent hover:border-[#d4af37] pb-1">Parrainage Client</a>
+            <!-- Lien vers la page Partenaire (ou l'onglet FAQ partenaire en attendant) -->
+            <a href="partenaires.html" class="hover:text-[#d4af37] transition border-b border-transparent hover:border-[#d4af37] pb-1 text-white">Devenir Partenaire Affilié</a>
+        </div>
+
+        <!-- Réseaux Sociaux -->
+        <!-- Réseaux Sociaux -->
+<div class="flex justify-center gap-8 mb-12">
+    <!-- WhatsApp avec message pré-rempli -->
+    <a href="https://wa.me/34602199293?text=Bonjour%20Ludovic%2C%20je%20souhaiterais%20discuter%20de%20la%20mise%20en%20place%20d'une%20infrastructure%20Cabinet%203.0%20(IA%20%2F%20Automatisation)%20pour%20mon%20activit%C3%A9.%20Merci%20!" 
+       target="_blank" 
+       class="text-gray-500 hover:text-[#d4af37] transition">
+        <i data-feather="message-circle"></i>
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/in/ludovic-stoj-3778b0352/" 
+       target="_blank" 
+       class="text-gray-500 hover:text-[#d4af37] transition">
+        <i data-feather="linkedin"></i>
+    </a>
+
+    <!-- Facebook Tech -->
+    <a href="https://www.facebook.com/61588321079201" 
+       target="_blank" 
+       class="text-gray-500 hover:text-[#d4af37] transition">
+        <i data-feather="facebook"></i>
+    </a>
+
+    <!-- Instagram (à remplir avec ton lien si besoin) -->
+    <a href="#" 
+       class="text-gray-500 hover:text-[#d4af37] transition">
+        <i data-feather="instagram"></i>
+    </a>
+</div>
+        
+        <!-- Le petit texte gris de copyright devient ici très lisible grâce au fond noir -->
+        <p class="text-[10px] text-gray-600 uppercase tracking-widest">
+            © 2026 SL EXCELLENCE HEALTH TECH. TOUS DROITS RÉSERVÉS.
+        </p>
+    </div>
+</footer>
+
+    <script>
+        feather.replace();
+    </script>
+
+
+
+<script>
+window.refreshCalendar = function() {
+    // On cible directement les deux iframes par leurs IDs ou conteneurs
+    const bodyIframe = document.getElementById('header-gcal-body');
+    const headerIframe = document.querySelector('#calendar-header-fixed iframe');
+
+    [bodyIframe, headerIframe].forEach(iframe => {
+        if (iframe) {
+            let baseUrl = iframe.src.split('&cache=')[0];
+            // On force la mise à jour en ajoutant un timestamp unique
+            iframe.src = baseUrl + '&cache=' + new Date().getTime();
+        }
+    });
+    console.log("Agendas synchronisés !");
+};
+
+    feather.replace();
+
+    const testimonials = [
+        {
+            text: "En tant que dentiste, j'avais horreur d'être interrompue en plein soin. L'IA gère désormais 90% de mes appels de prise de RDV. C'est un confort de travail inestimable.",
+            author: "Dr. Élodie M.",
+            specialty: "Chirurgien-Dentiste",
+            stars: 5,
+            avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+        },
+        {
+            text: "Le Pack 3.0 a été rentabilisé en moins d'un mois. L'IA récupère tous les patients qui ne laissaient jamais de message sur mon répondeur auparavant.",
+            author: "Thomas R.",
+            specialty: "Masseur-Kinésithérapeute",
+            stars: 5,
+            avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+        },
+        {
+            text: "L'installation a été ultra-rapide. Avoir un site web qui travaille avec mon agenda Google pendant que je dors a totalement changé mon flux de nouveaux patients.",
+            author: "Dr. Marc L.",
+            specialty: "Médecin Généraliste",
+            stars: 5,
+            avatar: "https://randomuser.me/api/portraits/men/56.jpg"
+        },
+        {
+            text: "Mes confrères me demandent comment je fais pour ne plus jamais avoir de bruit de téléphone au cabinet. Je leur réponds simplement : SL Excellence.",
+            author: "Clara D.",
+            specialty: "Ostéopathe D.O.",
+            stars: 5,
+            avatar: "https://randomuser.me/api/portraits/women/68.jpg"
+        }
+    ];
+
+    let current = 0;
+    const textEl = document.getElementById('testimonial-text');
+    const authorEl = document.getElementById('testimonial-author');
+    const specialtyEl = document.getElementById('testimonial-specialty');
+    const flashEl = document.getElementById('testimonial-flash');
+    const starsEl = document.getElementById('testimonial-stars');
+    const avatarImg = document.getElementById('testimonial-avatar');
+
+    function renderStars(count) {
+    starsEl.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+        starsEl.innerHTML += `
+            <svg class="w-6 h-6 text-[#d4af37] fill-current drop-shadow-[0_0_8px_rgba(212,175,55,0.8)]" viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>`;
+        }
+
+        feather.replace();
+    }
+
+    function updateTestimonial() {
+        // Déclenchement du flash
+        flashEl.style.opacity = '0.4';
+        
+        setTimeout(() => {
+            current = (current + 1) % testimonials.length;
+            const t = testimonials[current];
+            
+            // Mise à jour des contenus
+            textEl.textContent = `"${t.text}"`;
+            authorEl.textContent = t.author;
+            specialtyEl.textContent = t.specialty;
+            avatarImg.src = t.avatar;
+            renderStars(t.stars);
+            
+            // Retrait du flash
+            flashEl.style.opacity = '0';
+        }, 300);
+    }
+
+    // Initialisation
+    updateTestimonial();
+
+    // Changement automatique toutes les 7 secondes
+    setInterval(updateTestimonial, 7000);
+
+    // FAQ Logic
+    function forceOpenFaq(hash) {
+        if (!hash || !hash.startsWith('#faq-')) return;
+        const el = document.querySelector(hash);
+        if (el && el.tagName === 'DETAILS') {
+            el.setAttribute('open', '');
+            setTimeout(() => {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+    }
+
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (link && link.hash && link.hash.startsWith('#faq-')) {
+            forceOpenFaq(link.hash);
+        }
+    });
+
+
+
+    function toggleMenu(event) {
+    if (event) event.stopPropagation();
+    
+    const menu = document.getElementById('side-menu');
+    const trigger = document.getElementById('nav-trigger');
+    const hamburgerBtn = document.querySelector('.mobile-nav-btn'); // Cible le bouton rond avec les 3 barres
+    
+    const isOpen = menu.classList.contains('open');
+
+    if (!isOpen) {
+        // OUVERTURE
+        menu.classList.add('open');
+        // On cache COMPLÈTEMENT le bouton hamburger pour ne plus voir les 3 barres
+        if (hamburgerBtn) {
+            hamburgerBtn.style.opacity = '0';
+            hamburgerBtn.style.pointerEvents = 'none';
+        }
+        if (trigger && window.innerWidth >= 768) trigger.style.transform = 'translateX(350px)';
+    } else {
+        // FERMETURE
+        menu.classList.remove('open');
+        // On fait réapparaître le bouton hamburger
+        if (hamburgerBtn) {
+            hamburgerBtn.style.opacity = '1';
+            hamburgerBtn.style.pointerEvents = 'auto';
+        }
+        if (trigger && window.innerWidth >= 768) trigger.style.transform = 'translateX(0)';
+    }
+    feather.replace();
+}
+
+// Gestion intelligente des clics extérieurs
+document.addEventListener('click', (e) => {
+    const menu = document.getElementById('side-menu');
+    const langDropdown = document.getElementById('lang-dropdown');
+    
+    // Si le menu latéral est ouvert et qu'on clique en dehors
+    if (menu.classList.contains('open')) {
+        // On vérifie si le clic n'est ni sur le menu, ni sur les boutons qui l'ouvrent
+        if (!menu.contains(e.target) && !e.target.closest('#nav-trigger') && !e.target.closest('.mobile-nav-btn')) {
+            toggleMenu();
+        }
+    }
+
+    // Fermer le menu langue si on clique n'importe où ailleurs
+    if (langDropdown && !langDropdown.classList.contains('hidden')) {
+        if (!e.target.closest('#language-selector')) {
+            langDropdown.classList.add('hidden');
+        }
+    }
+});
+
+// 1. Initialisation Google Translate (Source : Français)
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,es,fr,it',
+        autoDisplay: false
+    }, 'google_translate_element');
+}
+
+// 2. Fonction de changement de langue par COOKIE
+function changeLanguage(langCode) {
+    // On extrait le domaine principal (ex: sl-excellence.com)
+    const domain = "." + location.hostname.split('.').slice(-2).join('.');
+    const cookieValue = "/fr/" + langCode;
+    
+    // 1. On efface agressivement les cookies existants sur tous les niveaux
+    const paths = ["/", "/"];
+    const domains = [location.hostname, domain, ""];
+    
+    domains.forEach(d => {
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ${d ? "domain=" + d + ";" : ""}`;
+    });
+
+    // 2. On définit le nouveau cookie sur le domaine racine ET le domaine actuel
+    document.cookie = `googtrans=${cookieValue}; path=/; domain=${domain}`;
+    document.cookie = `googtrans=${cookieValue}; path=/`;
+
+    // 3. Rechargement forcé
+    location.reload();
+}
+
+// 3. Chargement de l'API Google
+(function() {
+    var gt = document.createElement('script');
+    gt.type = 'text/javascript';
+    gt.async = true;
+    gt.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.body.appendChild(gt);
+})();
+
+function toggleSound(videoId, btn) {
+    const video = document.getElementById(videoId);
+    const icon = btn.querySelector('svg');
+    
+    if (video.muted) {
+        video.muted = false;
+        // On change l'icône vers volume-2 (son activé)
+        btn.innerHTML = '<i data-feather="volume-2"></i>';
+    } else {
+        video.muted = true;
+        btn.innerHTML = '<i data-feather="volume-x"></i>';
+    }
+    feather.replace(); // Pour rafraîchir l'icône Feather
+}
+
+function updateTechLabels() {
+    const cookies = document.cookie.split('; ');
+    const langCookie = cookies.find(row => row.startsWith('googtrans='));
+    // On récupère le code langue (ex: 'es' dans '/fr/es')
+    const currentLang = langCookie ? langCookie.split('/').pop() : 'fr'; 
+
+    const labels = {
+        'es': 'Ficha Técnica',
+        'en': 'Technical Datasheet',
+        'fr': 'Fiche Technique',
+        'it': 'Scheda Tecnica'
+    };
+
+    const label = labels[currentLang] || labels['en'];
+
+    // On applique le bon texte à tous les spans avec la classe .tech-text
+    document.querySelectorAll('.tech-text').forEach(span => {
+        span.innerText = label;
+        // On ajoute l'attribut notranslate pour éviter que Google n'essaie de retraduire par dessus
+        span.classList.add('notranslate');
+    });
+}
+
+// Lancer la fonction au chargement
+window.addEventListener('load', updateTechLabels);
+
+// Ouvre et ferme le menu des langues
+function toggleLanguageMenu(event) {
+    event.stopPropagation(); // Empêche le clic de se propager au document
+    const dropdown = document.getElementById('lang-dropdown');
+    dropdown.classList.toggle('hidden');
+}
+
+
+
+
+function checkVocalVisibility() {
+    // On utilise ta fonction getLang déjà existante dans ton code
+    const currentLang = getLang(); 
+    const vocalSection = document.getElementById('vocal-ia-column');
+
+    if (vocalSection) {
+        if (currentLang === 'fr') {
+            vocalSection.style.display = 'block'; // Affiche si Français
+        } else {
+            vocalSection.style.display = 'none';  // Cache pour les autres langues
+        }
+    }
+}
+
+// On l'exécute au chargement de la page
+window.addEventListener('load', checkVocalVisibility);
+
+// Comme Google Translate change la langue sans recharger parfois, 
+// on vérifie aussi après un court délai
+setTimeout(checkVocalVisibility, 2000);
+
+</script>
+
+<!-- REPARATEUR UNIVERSEL VAPI -->
+<!-- 1. Préparation du terrain pour éviter l'erreur 'exports' -->
+<!-- 1. CORRECTIF GLOBAL (Anti-erreur et Anti-plantage) -->
+<script>
+    // --- GÉNÉRATION DE L'ID UNIQUE VISITEUR ---
+    // 1. RÉPARATION ET UNIFICATION DE L'ID (Force 'client_')
+    if (!localStorage.getItem('sl_user_id') || localStorage.getItem('sl_user_id').startsWith('u_')) {
+        localStorage.setItem('sl_user_id', 'client_' + Math.random().toString(36).substr(2, 9));
+    }
+    window.FINAL_USER_ID = localStorage.getItem('sl_user_id');
+    console.log("ID Sécurisé prêt :", window.FINAL_USER_ID);
+
+        
+    // Réparation définitive de getLang pour tout le site
+    window.getLang = function() {
+        try {
+            // 1. On regarde UNIQUEMENT si Google Translate est activé
+            const match = document.cookie.match(new RegExp('(^| )googtrans=([^;]+)'));
+            if (match) {
+                const parts = match[2].split('/');
+                const lang = parts[parts.length - 1].toLowerCase().substring(0,2);
+                // Si c'est une des langues que tu gères, on la renvoie
+                if (['en', 'es', 'it'].includes(lang)) return lang;
+            }
+            
+            // 2. DANS TOUS LES AUTRES CAS : ON FORCE LE FRANÇAIS
+            // (Même si l'iPhone est configuré en Anglais, Chinois ou Russe)
+            return 'fr';
+        } catch (e) { return 'fr'; }
+    };
+
+    window.checkVocalVisibility = function() {
+        const vocal = document.getElementById('vocal-ia-column');
+        if (vocal) vocal.style.display = (window.getLang() === 'fr') ? 'block' : 'none';
+    };
+
+    // On expose les outils standards
+    window.exports = window.exports || {};
+    window.require = window.require || function(o){ return window[o]; };
+</script>
+
+<!-- 2. CHARGEMENT MODERNE -->
+<script type="module">
+    import VapiModule from 'https://cdn.jsdelivr.net/npm/@vapi-ai/web/+esm';
+
+    const CONFIG = {
+        key: "46368188-6ceb-4999-8900-9c580c81df26"
+    };
+
+    // Dictionnaire des assistants par langue (modifiables si besoin)
+    const ASSISTANT_IDS = {
+        fr: "a3aaf0bb-815e-4583-9038-019e288c2ed3",
+        es: "a3aaf0bb-815e-4583-9038-019e288c2ed3",
+        en: "a3aaf0bb-815e-4583-9038-019e288c2ed3",
+        it: "a3aaf0bb-815e-4583-9038-019e288c2ed3"
+    };
+
+    let vapi = null;
+    let isCallActive = false;
+    let audioCtx = null;
+
+    // --- MISE À JOUR VISUELLE ---
+    // --- MISE À JOUR VISUELLE (FIX COULEUR ROUGE) ---
+    const updateUI = (state) => {
+        const btns = document.querySelectorAll('.vapi-btn-trigger');
+        btns.forEach(btn => {
+            const textSpan = btn.querySelector('.vapi-btn-text');
+            const dot = btn.querySelector('span.absolute'); // Le point vert/rouge
+
+            if (state === 'active') {
+                // 1. On active le style ROUGE
+                btn.classList.add('active-call');
+                // 2. On retire les classes BLEUES de Tailwind pour pas qu'elles bloquent
+                btn.classList.remove('border-blue-600', 'text-blue-500', 'shadow-[0_0_15px_rgba(37,99,235,0.2)]');
+                if(textSpan) textSpan.innerText = "RACCROCHER";
+                if(dot) { dot.classList.remove('bg-green-500'); dot.classList.add('bg-red-500'); }
+            } else {
+                // 1. On retire le style rouge
+                btn.classList.remove('active-call');
+                // 2. On remet les classes BLEUES originales
+                btn.classList.add('border-blue-600', 'text-blue-500', 'shadow-[0_0_15px_rgba(37,99,235,0.2)]');
+                
+                if (state === 'loading') {
+                    if(textSpan) textSpan.innerText = "CONNEXION...";
+                } else {
+                    const lang = window.getLang();
+                    if(textSpan) textSpan.innerText = textSpan.getAttribute('data-' + lang) || "RÉSERVER MA CONSULTATION";
+                    if(dot) { dot.classList.remove('bg-red-500'); dot.classList.add('bg-green-500'); }
+                }
+            }
+        });
+        if(window.feather) feather.replace();
+    };
+
+    // --- SETUP VAPI AVEC LOGS ---
+    const setupVapi = () => {
+        if (vapi) return vapi;
+        const Constructor = (typeof VapiModule === 'function') ? VapiModule : (VapiModule.default || window.Vapi);
+        vapi = new Constructor(CONFIG.key);
+        
+        vapi.on('call-start', () => {
+            console.log('✅ IA : Connexion établie !');
+            isCallActive = true;
+            updateUI('active');
+        });
+
+        vapi.on('call-end', () => {
+            console.log('🛑 IA : Appel terminé.');
+            isCallActive = false;
+            updateUI('idle');
+            // Appel de la fonction globale
+            if (typeof window.refreshCalendar === "function") {
+                window.refreshCalendar();
+            }
+        });
+
+        vapi.on('speech-start', () => console.log('🎙️ IA : Elle commence à parler...'));
+        vapi.on('speech-end', () => console.log('🤫 IA : Elle a fini de parler.'));
+        vapi.on('message', (msg) => console.log('💬 Message reçu :', msg));
+        
+        vapi.on('error', (e) => {
+            console.error('❌ ERREUR VAPI DÉTAILLÉE :', JSON.stringify(e, null, 2));
+            isCallActive = false;
+            updateUI('idle');
+        });
+        
+        return vapi;
+    };
+
+    // --- LOGIQUE D'APPEL (ASYNC POUR IPHONE) ---
+    const handleCall = async (e) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        // 1. RÉVEIL AUDIO (Obligatoire pour Safari)
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            await audioCtx.resume();
+        }
+
+        const instance = setupVapi();
+        
+        if (isCallActive) {
+            instance.stop();
+            return;
+        }
+
+        // 2. RÉCUPÉRATION DE L'ID SELON LA LANGUE
+        let currentLang = window.getLang() || 'fr';
+        let targetId = ASSISTANT_IDS[currentLang] || ASSISTANT_IDS.fr;
+
+        // 3. PRÉPARATION DES VARIABLES
+        const greetings = {
+            fr: ". . . Cabinet de Kiné-Ostéopathie SL Excellence... Bonjour. Comment puis-je vous aider?",
+            en: ". . . SL Excellence Physiotherapy Clinic... How can I help you?",
+            es: ". . . Clínica de Fisioterapia SL Excellence... Cómo puedo ayudarle?",
+            it: ". . . Studio di Fisioterapia SL Excellence... Come posso aiutarla?"
+        };
+
+        const now = new Date();
+        const dateString = now.toLocaleDateString('fr-FR', { 
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' 
+        });
+
+        const userId = window.FINAL_USER_ID || localStorage.getItem('sl_user_id') || "web_guest";
+
+        updateUI('loading');
+
+        // 4. LANCEMENT
+        instance.start(targetId, {
+            variableValues: { 
+                language: currentLang,
+                customGreeting: greetings[currentLang] || greetings.fr,
+                current_date: dateString,
+                user_id: userId.toString()
+            }
+        }).catch(err => {
+            console.error("❌ Erreur Vapi au lancement:", err);
+            updateUI('idle');
+        });
+    };
+
+    // --- ATTACHE DES ÉVÉNEMENTS ---
+    const bindButtons = () => {
+        document.querySelectorAll('.vapi-btn-trigger').forEach(btn => {
+            btn.onclick = handleCall;
+            btn.ontouchend = (e) => {
+                if (!isCallActive) handleCall(e);
+            };
+        });
+    };
+
+    // --- INITIALISATION ---
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => { 
+            bindButtons(); 
+            window.checkVocalVisibility(); 
+        });
+    } else {
+        bindButtons();
+        window.checkVocalVisibility();
+    }
+</script>
+
+<!-- ==========================================
+     WIDGET AI CONCIERGE SL EXCELLENCE (V11)
+     ========================================== -->
+<div id="ai-master-portal" style="position: fixed !important; z-index: 2147483647 !important;">
+    <style>
+        body:not(.ai-opened):has(#mobile-menu:not(.hidden)) #ai-master-portal,
+body:not(.ai-opened):has(#side-menu.open) #ai-master-portal {
+    pointer-events: none !important;
+    opacity: 0.2 !important; /* Il devient un fantôme comme tu voulais */
+    z-index: 0 !important;   /* Il passe derrière les menus */
+    transition: opacity 0.4s ease;
+}
+/* On force pointer-events à AUTO dès que le chat est ouvert */
+body.ai-opened #ai-master-portal {
+    pointer-events: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+        #ai-master-portal * { font-family: 'Montserrat', sans-serif !important; box-sizing: border-box !important; margin: 0; padding: 0; }
+        
+        /* FENÊTRE : ANCRAGE BAS-DROITE + FOND OPAQUE + GLASS */
+        #ai-ultimate-window {
+            position: fixed !important;
+            bottom: 100px !important;
+            right: 25px !important;
+            width: 380px !important;
+            max-width: 85vw !important;
+            height: 550px !important;
+            max-height: 75vh !important;
+            background: rgba(2, 12, 27, 0.98) !important; 
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1.5px solid rgba(212, 175, 55, 0.5) !important;
+            border-radius: 24px !important;
+            display: none;
+            flex-direction: column !important;
+            box-shadow: 0 20px 80px rgba(0,0,0,1) !important;
+            
+            /* MODIF : On le met à 46 pour que le bot à 47 passe devant */
+            z-index: 2147483646 !important; 
+            pointer-events: auto !important;
+            overflow: hidden !important;
+            isolation: isolate !important;
+        }
+
+        .ai-header-gold {
+            background: linear-gradient(90deg, #d4af37, #f6e27a, #b8860b) !important;
+            padding: 18px 22px !important;
+            color: #000 !important;
+            font-weight: 900 !important;
+            text-transform: uppercase !important;
+            font-size: 13px !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            letter-spacing: 1px !important;
+        }
+
+        #ai-box {
+            flex: 1 !important;
+            padding: 20px !important;
+            overflow-y: auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+            background: transparent !important;
+        }
+
+        /* BULLES DE MESSAGES */
+        .ai-msg-ia, .ai-msg-user { 
+            color: #fff !important; 
+            padding: 12px 16px !important; 
+            font-size: 14px !important;
+            line-height: 1.5 !important;
+            word-wrap: break-word !important;
+        }
+        .ai-msg-ia { 
+            background: rgba(212, 175, 55, 0.15) !important; 
+            border-radius: 18px 18px 18px 4px !important; 
+            align-self: flex-start !important; 
+            max-width: 85% !important; 
+            border: 1px solid rgba(212, 175, 55, 0.3) !important;
+            color: #f6e27a !important;
+        }
+        .ai-msg-user { 
+            background: rgba(255, 255, 255, 0.1) !important; 
+            border-radius: 18px 18px 4px 18px !important; 
+            align-self: flex-end !important; 
+            max-width: 85% !important; 
+            border: 1px solid rgba(255,255,255,0.1) !important;
+        }
+
+        /* BOUTON FLOTTANT */
+        #ai-ultimate-btn {
+    position: fixed !important;
+    bottom: -40px !important; /* Ajuste pour descendre l'image globale */
+    right: 0px !important;
+    
+    /* On augmente la zone de clic pour que l'image puisse être grande */
+    width: 200px !important; 
+    height: 210px !important;
+    
+    background: transparent !important; /* Supprime le fond jaune */
+    border: none !important; /* Supprime l'ancienne bordure */
+    
+    /* CRUCIAL : Supprimer ces deux lignes ou les mettre comme ça : */
+    border-radius: 0 !important; /* On n'est plus forcé d'être un cercle */
+    overflow: visible !important; /* L'image ne sera plus coupée par les bords du bouton */
+    
+    cursor: pointer !important;
+    z-index: 2147483647 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    
+    /* On enlève l'ombre qui faisait le contour de la boule */
+    box-shadow: none !important; 
+    
+    animation: aiJump 4s infinite ease-in-out !important;
+    pointer-events: none !important; /* Le carré du bouton devient invisible aux clics */
+}
+
+#ai-ultimate-btn img {
+    /* L'image va maintenant prendre toute la place disponible dans les 250px */
+    width: 100% !important;
+    height: auto !important;
+    
+    /* Pour la descendre spécifiquement elle, sans bouger le bouton */
+    transform: translateY(20px) !important; 
+    
+    border-radius: 0 !important; /* Supprime l'arrondi sur l'image elle-même */
+    object-fit: contain !important; /* Garde les proportions sans couper */
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)) !important; /* Ajoute une ombre à la forme de l'image (pas au carré) */
+    /* --- SOLUTION ICI --- */
+    pointer-events: auto !important; /* Seule l'image capte le clic et l'envoie au bouton */
+    cursor: pointer !important;
+
+}
+        /* FOOTER ÉPURÉ AVEC WHATSAPP */
+        .ai-footer {
+            padding: 12px 15px !important;
+            border-top: 1px solid rgba(212, 175, 55, 0.2) !important;
+            display: flex !important;
+            background: rgba(0,0,0,0.8) !important;
+            align-items: center !important;
+            gap: 10px !important;
+            padding-right: 90px !important; 
+        }
+        #ai-input-text { 
+            flex: 1 !important; 
+            background: rgba(255,255,255,0.05) !important; 
+            border: 1px solid rgba(212, 175, 55, 0.2) !important; 
+            border-radius: 10px !important;
+            padding: 10px !important; 
+            color: #fff !important; 
+            outline: none !important; 
+            font-size: 16px !important;
+        }
+
+        /* INDICATEUR D'ÉCRITURE */
+        .typing-dots { display: flex !important; gap: 4px !important; padding: 12px 16px !important; }
+        .typing-dots span { 
+            width: 6px !important; height: 6px !important; background: #d4af37 !important; 
+            border-radius: 50% !important; animation: dotPulse 1.5s infinite !important;
+        }
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s !important; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s !important; }
+
+        @keyframes aiJump {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-12px); }
+            60% { transform: translateY(-6px); }
+        }
+        @keyframes dotPulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        #ai-box::-webkit-scrollbar { width: 4px; }
+        #ai-box::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+    
+    
+    /* --- DESIGN MOBILE : PLEIN ÉCRAN + BOT SOUS LE HEADER (MÊME AXE) --- */
+@media (max-width: 767px) {
+/* --- TAILLE DU ROBOT SUR Mobil --- */
+    #ai-ultimate-btn {
+    width: 80px !important;
+    height: 80px !important;
+    bottom: 40px !important;  /* <--- Change 40px par 0px pour le coller en bas */
+    right: -3px !important;
+}
+@supports (-webkit-touch-callout: none) {
+        #ai-ultimate-btn {
+            /* On baisse la valeur pour compenser la barre Safari. 
+               Teste entre 0px et 10px pour que ça ne vole plus. */
+            bottom: -15px !important; 
+        }
+       }
+
+    #ai-master-portal, #ai-master-portal * {
+        /* Supprime le rectangle de focus au clic */
+        -webkit-tap-highlight-color: transparent !important;
+        /* Empêche de sélectionner le texte par erreur en scrollant */
+        -webkit-user-select: none !important; 
+        user-select: none !important;
+    }
+
+    /* On autorise la sélection UNIQUEMENT dans les bulles pour copier les liens */
+    .ai-msg-ia, .ai-msg-user {
+        -webkit-user-select: text !important;
+        user-select: text !important;
+    }
+
+
+    #ai-master-portal {
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-touch-callout: none !important;
+        user-select: none !important;
+    }
+
+    /* On réactive la sélection uniquement pour le texte des bulles */
+    .ai-msg-ia, .ai-msg-user {
+        user-select: text !important;
+        -webkit-user-select: text !important;
+    }
+
+
+    #ai-ultimate-window {
+    bottom: 0px !important; /* On le colle au bas du chat */
+top: auto !important;    /* On annule ton "top: 490px" qui cause le décalage */
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important; 
+    max-height: 100dvh !important;
+    background: #020c1b !important; 
+    border-radius: 0 !important;
+    border: none !important;
+    z-index: 2147483640 !important;
+    /* Ajoute ça pour forcer Safari à créer une couche de rendu propre */
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    
+    
+    
+    /* AJOUTE CETTE LIGNE ICI */
+    overscroll-behavior: none !important; 
+    
+}
+
+#ai-box {
+    flex: 1 !important; /* Prend tout l'espace libre au milieu */
+    overflow-y: auto !important; /* AUTORISE LE SCROLL ICI UNIQUEMENT */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 20px !important;
+    height: auto !important; /* Très important pour le Flexbox */
+    -webkit-overflow-scrolling: touch !important; /* Scroll fluide iOS */
+    overscroll-behavior: contain !important; /* EMPECHE LE REBOND DE LA FENETRE */
+}
+
+
+body.ai-opened {
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+}
+    /* POSITION DU BOT OUVERT */
+    /* --- DESIGN MOBILE : ROBOT QUAND LA CONVERSATION EST OUVERTE --- */
+    .ai-opened #ai-ultimate-btn {
+    bottom: 0px !important; /* <--- Change "auto" par 0px pour le fixer au sol */
+    top: auto !important;    /* <--- Change 490px par auto */
+    right: 0px !important; 
+    width: 120px !important; 
+    height: 120px !important;
+    animation: none !important;
+    z-index: 2147483647 !important;
+    pointer-events: none !important; 
+    opacity: 1 !important;
+}
+
+
+
+    /* On remet l'image droite (sans le décalage de 20px) quand c'est ouvert */
+    .ai-opened #ai-ultimate-btn img {
+        transform: translateY(0) !important;
+    }
+
+    /* EMPÊCHER LE ZOOM iOS lors du clic sur le texte */
+    #ai-input-text { 
+        font-size: 16px !important; 
+        pointer-events: auto !important;
+        -webkit-user-select: text !important; /* Autorise la sélection sur Safari */
+        user-select: text !important;
+    }
+
+    #ai-box {
+    flex: 1 !important;
+    padding: 20px !important;
+    overflow-y: auto !important;
+    height: 0 !important; /* <--- AJOUTE ÇA : ça force le scroll interne */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    background: transparent !important;
+}
+
+    
+.ai-footer {
+    position: relative !important; /* Pour rester dans le flux du bas */
+    margin-top: auto !important;
+    flex-shrink: 0 !important; /* <--- C'EST CETTE LIGNE QUI BLOQUE L'INPUT EN BAS */
+    position: relative !important;
+    pointer-events: auto !important; /* Force l'interactivité */
+    z-index: 2147483647 !important; /* Un de plus que la fenêtre */
+  }
+
+}
+
+/* --- DESIGN PC : ON GARDE TOUT IDENTIQUE --- */
+@media (min-width: 768px) {
+    /* --- TAILLE DU ROBOT SUR PC --- */
+    #ai-ultimate-btn {
+        width: 120px !important;   /* Taille du robot sur PC */
+        height: 120px !important;  /* Taille du robot sur PC */
+        bottom: 50px !important;  /* Distance du bord bas */
+        right: -3px !important;   /* Distance du bord droit */
+    }
+
+    /* Sur PC, on s'assure juste que le bot est devant quand on ouvre */
+    #ai-ultimate-window {
+        z-index: 2147483640 !important;
+    }
+    #ai-ultimate-btn {
+        z-index: 2147483647 !important;
+    }
+    /* On supprime toute transformation ou réduction de taille ici */
+    .ai-opened #ai-ultimate-btn {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
+
+
+
+
+
+
+    </style>
+
+    <button id="ai-ultimate-btn" onclick="toggleChat()">
+    <!-- Remplace le lien ci-dessous par l'URL de ton image (Pinata, Google, etc.) -->
+        <img src="https://emerald-immense-sole-618.mypinata.cloud/ipfs/bafkreifdvv66rehuyawaikygxwvggmeyqhrh3abwmcs23gvwlb7gkht57i" alt="SL IA" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; filter: none !important;">
+    </button>
+
+    <div id="ai-ultimate-window">
+    <div class="ai-header-gold">
+        <!-- Groupe Gauche : WhatsApp VERT + Titre -->
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <a id="wa-switch-link" href="#" target="_blank" style="display: flex !important; align-items: center;">
+                <!-- On a enlevé le filter: brightness(0) pour retrouver le vert -->
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="22" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+            </a>
+            <span style="color: #000;">Concierge - SL Excellence</span>
+        </div>
+        
+        <!-- Groupe Droite : Croix de fermeture -->
+        <span onclick="toggleChat()" style="cursor:pointer; font-size:28px; line-height:1; color: #000;">&times;</span>
+    </div>
+
+    <div id="ai-box"></div>
+
+    <div class="ai-footer">
+        <!-- L'input prend toute la place en bas -->
+        <input type="text" id="ai-input-text" placeholder="Tapez ici..." style="width: 100% !important;">
+    </div>
+</div>
+
+<script>
+  document.addEventListener('touchmove', function(e) {
+    if (document.body.classList.contains('ai-opened')) {
+        // Si on ne touche PAS la zone des messages, on annule le mouvement
+        if (!e.target.closest('#ai-box')) {
+            e.preventDefault();
+        }
+    }
+}, { passive: false });
+
+
+    
+
+(function() {
+    // FORCE LE DÉPLACEMENT DANS LE BODY POUR BYPASSER LES Z-INDEX DU SITE
+    const portal = document.getElementById('ai-master-portal');
+    document.body.appendChild(portal);
+
+    const SERVER_URL = "https://ia-whatsapp-demarchage-client.onrender.com/webchat"; 
+
+    function getLang() {
+        const match = document.cookie.match(new RegExp('(^| )googtrans=([^;]+)'));
+        if (match) return match[2].split('/').pop();
+        return navigator.language.split('-')[0] || 'fr';
+    }
+
+    const lang = getLang();
+    // --- DÉTECTION DE LA PROVENANCE (PDF vs STANDARD) ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const isFromPDF = urlParams.get('openchat') === 'true';
+
+    const greets = {
+        'fr': isFromPDF 
+            ? ["Bonjour ! J'ai vu que vous veniez de lire mon guide \"Le Système d'Excellence\".", "Souhaitez-vous que nous fixions votre séance de diagnostic offert pour votre cabinet ?"]
+            : ["Bonjour, je suis Luna, l'assistante de SL Excellence.", "En quoi puis-je vous aider ?"],
+        
+        'es': isFromPDF
+            ? ["¡Hola! Veo que acaba de leer mi guía \"El Sistema de Excelencia\".", "¿Le gustaría que fijemos su diagnóstico gratuito para su clínica?"]
+            : ["Hola, soy Luna, la asistente de SL Excellence.", "¿En qué puedo ayudarle?"],
+        
+        'en': isFromPDF
+            ? ["Hello! I see you've just read my guide \"The Excellence System\".", "Would you like us to schedule your free diagnosis for your practice?"]
+            : ["Hello, I am Luna, the SL Excellence assistant.", "How can I help you?"],
+        
+        'it': isFromPDF
+            ? ["Buongiorno! Vedo che hai appena letto la mia guida \"Il Sistema d'Eccellenza\".", "Desideri fissare il tuo diagnostic gratuito per il tuo studio?"]
+            : ["Buongiorno, sono Luna, l'assistante di SL Excellence.", "Come posso aiutarla?"]
+    };
+
+    const win = document.getElementById('ai-ultimate-window');
+    const box = document.getElementById('ai-box');
+    const input = document.getElementById('ai-input-text');
+    const waLink = document.getElementById('wa-switch-link');
+
+    // Init WhatsApp
+    const waText = {
+        'fr': 'Bonjour! Je viens de votre site et je souhaite plus d\'informations.',
+        'es': 'Hola! Vengo de vuestra web y quiero más información.',
+        'en': 'Hello! I am coming from your website and I need more info.'
+    };
+    waLink.href = `https://wa.me/34602199293?text=${encodeURIComponent(waText[lang] || waText['fr'])}`;
+
+    function linkify(text) {
+        const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        return text.replace(urlPattern, '<a href="$1" target="_blank" style="color:#f6e27a; text-decoration:underline;">$1</a>');
+    }
+
+    function showTyping(callback) {
+        const dots = document.createElement('div');
+        dots.className = 'ai-msg-ia typing-dots';
+        dots.innerHTML = '<span></span><span></span><span></span>';
+        box.appendChild(dots);
+        box.scrollTop = box.scrollHeight;
+        setTimeout(() => { dots.remove(); callback(); }, 1200);
+    }
+
+    function appendMsg(text, type, callback) {
+    const div = document.createElement('div');
+    div.className = type === 'ia' ? 'ai-msg-ia' : 'ai-msg-user';
+    box.appendChild(div);
+
+    const labels = { 'fr': 'Vous', 'es': 'Tú', 'en': 'You', 'it': 'Tu' };
+    const userLabel = labels[getLang()] || 'Vous';
+    
+    if (type === 'ia') {
+        let i = 0;
+        // On désactive la sélection pendant l'écriture
+        div.style.userSelect = "none"; 
+        div.style.webkitUserSelect = "none";
+
+        const timer = setInterval(() => {
+            div.innerHTML = linkify(text.substr(0, i));
+            i++;
+            box.scrollTop = box.scrollHeight;
+            if (i > text.length) { 
+                clearInterval(timer); 
+                // L'IA a fini : on autorise la sélection et on ajoute la classe finished
+                div.classList.add('finished');
+                div.style.userSelect = "text";
+                div.style.webkitUserSelect = "text";
+                if (callback) callback(); 
+            }
+        }, 15);
+    } else {
+        div.innerHTML = `<b>${userLabel} :</b> ` + linkify(text);
+        div.classList.add('finished'); // Le message utilisateur est direct fini
+        box.scrollTop = box.scrollHeight;
+        if (callback) callback();
+    }
+}
+
+    let scrollPos = 0; // Pour mémoriser où tu étais sur le site
+
+window.toggleChat = function() {
+    const portal = document.getElementById('ai-master-portal');
+    const win = document.getElementById('ai-ultimate-window');
+    const isOpen = win.style.display === 'flex';
+    
+    if (!isOpen) {
+        scrollPos = window.scrollY;
+        win.style.display = 'flex';
+        portal.classList.add('ai-opened');
+        document.body.classList.add('ai-opened');
+
+        // Correction Safari : Focus après l'affichage
+        setTimeout(() => {
+            input.focus();
+            window.scrollTo(0, 0); // Force le haut de page
+        }, 400); 
+        
+        if(window.visualViewport) win.style.height = window.visualViewport.height + 'px';
+        
+        if (box.innerHTML === "") {
+            const msgs = greets[lang] || greets['fr'];
+            showTyping(() => appendMsg(msgs[0], 'ia', () => setTimeout(() => showTyping(() => appendMsg(msgs[1], 'ia')), 600)));
+        }
+    } else {
+        win.style.display = 'none';
+        portal.classList.remove('ai-opened');
+        document.body.classList.remove('ai-opened');
+        window.scrollTo(0, scrollPos);
+    }
+};
+
+
+// --- FIX RADICAL CLAVIER IPHONE/ANDROID ---
+// --- DÉTECTION DU CLAVIER POUR POUSSER LE TEXTE ET LE BOT ---
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+        if (document.body.classList.contains('ai-opened')) {
+            const vv = window.visualViewport;
+            const win = document.getElementById('ai-ultimate-window');
+            
+            // On ajuste la hauteur pour laisser la place au clavier
+            win.style.height = vv.height + 'px';
+            
+            // On bloque le "top" sur l'offset du viewport pour ne pas voir le site dessous
+            win.style.top = vv.offsetTop + 'px';
+
+            // On force le scroll en bas des messages
+            const box = document.getElementById('ai-box');
+            if (box) box.scrollTop = box.scrollHeight;
+        }
+    });
+}
+
+// Empêcher l'iPhone de décaler tout le site quand on clique sur l'input
+const inputField = document.getElementById('ai-input-text');
+inputField.addEventListener('focus', () => {
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+    }, 50);
+});
+
+// Empeche le "pull-to-refresh" et le scroll du site derrière
+document.addEventListener('touchmove', function(e) {
+    if (document.body.classList.contains('ai-opened')) {
+        if (!e.target.closest('#ai-box')) {
+            e.preventDefault();
+        }
+    }
+}, { passive: false });
+
+    async function handleChatSubmit() {
+        const msg = input.value.trim();
+        if (!msg) return;
+        appendMsg(msg, 'user');
+        input.value = '';
+
+        // --- AJOUT : On remet le compteur à zéro (2h) à chaque message envoyé ---
+        localStorage.setItem('sl_last_interaction', Date.now());
+        
+        showTyping(async () => {
+            try {
+                // RÉCUPÉRATION DE L'ID AFFILIÉ SAUVARDÉ
+                const savedAff = localStorage.getItem('sl_affiliate_id') || "Direct";
+
+                const r = await fetch(SERVER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        message: msg, 
+                        user_id: window.FINAL_USER_ID,
+                        // --- ON ENVOIE L'ID AU SERVEUR ICI ---
+                        aff_id: savedAff 
+                    })
+                });
+                const d = await r.json();
+
+                if (typeof refreshCalendar === "function") refreshCalendar(); 
+                
+                const segments = d.reply.split(/[.!?]\s/).filter(s => s.trim().length > 0);
+                let finalMessages = (segments.length > 3) ? 
+                    [segments.slice(0, Math.ceil(segments.length/2)).join('. ') + '.', segments.slice(Math.ceil(segments.length/2)).join('. ') + '.'] 
+                    : [d.reply];
+
+                let currentIdx = 0;
+                const sendNext = () => {
+                    if (currentIdx < finalMessages.length) {
+                        appendMsg(finalMessages[currentIdx], 'ia', () => {
+                            currentIdx++;
+                            if (currentIdx < finalMessages.length) setTimeout(() => showTyping(sendNext), 500);
+                            else {
+                                localStorage.setItem('sl_history', box.innerHTML);
+                                // On met aussi à jour l'activité quand l'IA répond
+                                localStorage.setItem('sl_last_interaction', Date.now());
+                            }
+                        });
+                    }
+                };
+                sendNext();
+            } catch (e) { appendMsg("Désolé, j'ai une difficulté de connexion.", 'ia'); }
+        });
+    }
+
+    input.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleChatSubmit(); });
+
+    // RESET SAFARI au moment où le clavier se ferme
+    input.addEventListener('blur', () => {
+        if (document.body.classList.contains('ai-opened')) {
+            setTimeout(() => {
+                const win = document.getElementById('ai-ultimate-window');
+                window.scrollTo(0, 0); // Remet le site à zéro
+                win.style.top = '0px';  // Recale le chat en haut
+                win.style.height = '100dvh'; // Redonne toute la hauteur
+            }, 100);
+        }
+    });
+
+    // --- LOGIQUE DE NETTOYAGE VISUEL (Initialisation) ---
+    const NOW = Date.now();
+    const TWO_HOURS = 2 * 60 * 60 * 1000;
+    const lastSeen = localStorage.getItem('sl_last_interaction');
+
+    // Si plus de 2h d'inactivité, on supprime l'historique VISUEL
+    if (lastSeen && (NOW - lastSeen > TWO_HOURS)) {
+        localStorage.removeItem('sl_history');
+    }
+    // On met à jour le temps de visite (pour dire qu'il est là maintenant)
+    localStorage.setItem('sl_last_interaction', NOW);
+
+    
+
+    const saved = localStorage.getItem('sl_history');
+    if (saved) box.innerHTML = saved;
+    if (localStorage.getItem('sl_chat_open') === 'true') toggleChat();
+})();
+
+
+// --- AJOUT : OUVERTURE AUTOMATIQUE VIA URL ---
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('openchat') === 'true') {
+        // On attend que tout soit bien chargé
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const win = document.getElementById('ai-ultimate-window');
+                // On ne l'ouvre que s'il n'est pas déjà ouvert
+                if (win && win.style.display !== 'flex') {
+                    window.toggleChat();
+                }
+            }, 1500); // Délai de 1.5s pour l'effet "Surprise"
+        });
+    }
+
+
+    // --- SYSTÈME DE TRACKING AFFILIÉ ---
+const affId = urlParams.get('aff');
+if (affId) {
+    // On enregistre l'ID de l'affilié dans le navigateur du client pendant 30 jours
+    localStorage.setItem('sl_affiliate_id', affId);
+    console.log("Partenaire tracké : " + affId);
+}
+
+// Quand le client prend rendez-vous via l'IA, tu récupères l'ID comme ça :
+const savedAffiliate = localStorage.getItem('sl_affiliate_id') || "Direct (aucun)";
+
+
+
+
+
+    // 1. OUVRE L'INTERFACE DE RÉSERVATION AU CLIC SUR L'AGENDA
+    function openBooking() {
+        const googleLayer = document.getElementById('google-view-layer');
+        const bookingLayer = document.getElementById('booking-layer');
+        const clickCapture = document.getElementById('calendar-click-capture');
+
+        googleLayer.style.opacity = "0";
+        bookingLayer.classList.remove('pointer-events-none');
+        bookingLayer.style.opacity = "1";
+        clickCapture.style.display = "none"; // On retire le bouclier pour laisser cliquer dans Cal.com
+    }
+
+    // 2. ÉCOUTE LA RÉUSSITE DU RDV POUR FERMER ET RECHARGER
+    window.addEventListener("message", function (e) {
+        // Cal.com envoie 'bookingSuccessful' quand c'est validé
+        if (e.data.origin === "Cal" && (e.data.type === "bookingSuccessful" || e.data.type === "success")) {
+            setTimeout(closeAndRefresh, 1500); // Laisse 1.5s au client pour voir la confirmation
+        }
+    });
+
+    function closeAndRefresh() {
+        const googleLayer = document.getElementById('google-view-layer');
+        const bookingLayer = document.getElementById('booking-layer');
+        const clickCapture = document.getElementById('calendar-click-capture');
+        const gcalIframe = document.getElementById('gcal-iframe');
+
+        // Retour visuel
+        bookingLayer.style.opacity = "0";
+        bookingLayer.classList.add('pointer-events-none');
+
+        // Rafraîchissement forcé de l'agenda Google (Anti-cache)
+        const currentSrc = gcalIframe.src.split('&cache=')[0];
+        gcalIframe.src = currentSrc + "&cache=" + new Date().getTime();
+
+        setTimeout(() => {
+            googleLayer.style.opacity = "1";
+            clickCapture.style.display = "block";
+        }, 600);
+    }
+
+
+
+
+        feather.replace();
+
+        let isHeaderOpen = false;
+        let headerPos = 0;
+
+        function lockHeaderScroll() { window.scrollTo(0, headerPos); }
+
+        // --- FONCTION OUVERTURE / FERMETURE ---
+        window.toggleHeaderBooking = function() {
+            const master = document.getElementById('header-calendar-master');
+            const gView = document.getElementById('header-google-view');
+            const bLayer = document.getElementById('header-booking-layer');
+            const closeX = document.getElementById('header-close-x');
+
+            if (!isHeaderOpen) {
+                headerPos = window.pageYOffset || document.documentElement.scrollTop;
+                const margin = 90; 
+                const offset = (master.getBoundingClientRect().top + headerPos) - margin;
+                window.scrollTo({ top: offset, behavior: 'smooth' });
+
+                gView.style.opacity = "0";
+                bLayer.classList.remove('pointer-events-none');
+                bLayer.style.opacity = "1";
+                closeX.style.display = "flex";
+
+                setTimeout(() => {
+                    window.addEventListener('scroll', lockHeaderScroll);
+                    isHeaderOpen = true;
+                }, 700);
+            } else {
+                window.removeEventListener('scroll', lockHeaderScroll);
+                bLayer.style.opacity = "0";
+                bLayer.classList.add('pointer-events-none');
+                closeX.style.display = "none";
+                setTimeout(() => { gView.style.opacity = "1"; }, 500);
+                isHeaderOpen = false;
+            }
+        }
+
+        // --- GESTION DU SCROLL ET CLIC (LA VERSION PARFAITE) ---
+        // --- GESTION DU SCROLL ET CLIC (VERSION CORRIGÉE ANTI-SCROLL PAGE) ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const shield = document.getElementById('header-shield');
+            const scrollArea = document.getElementById('header-calendar-scroll');
+            
+            if (!shield || !scrollArea) return;
+
+            // 1. DÉMARRAGE À 08H00
+            scrollArea.scrollTop = 280;
+
+            let startY = 0;
+            let isMoving = false;
+
+            // 2. SCROLL SOURIS (PC) : Empêche la page de bouger
+            shield.addEventListener('wheel', (e) => {
+                if (isHeaderOpen) return;
+                e.preventDefault(); // Bloque le scroll de la page
+                e.stopPropagation(); // Empêche l'événement de monter vers le body
+                scrollArea.scrollTop += e.deltaY;
+            }, { passive: false });
+
+            // 3. GESTION DU TOUCH (MOBILE) : Empêche la page de bouger
+            shield.addEventListener('touchstart', (e) => {
+                startY = e.touches[0].pageY;
+                isMoving = false;
+            }, { passive: true });
+
+            shield.addEventListener('touchmove', (e) => {
+                if (isHeaderOpen) return;
+                const touchY = e.touches[0].pageY;
+                const diff = startY - touchY;
+
+                // Si on bouge le doigt, on bloque TOUT mouvement de la page derrière
+                if (Math.abs(diff) > 2) {
+                    isMoving = true;
+                    if (e.cancelable) e.preventDefault(); // C'est CA qui bloque la page
+                    e.stopPropagation();
+                    scrollArea.scrollTop += diff;
+                    startY = touchY;
+                }
+            }, { passive: false }); // Toujours mettre passive: false pour pouvoir preventDefault
+
+            shield.addEventListener('touchend', (e) => {
+                if (!isMoving) {
+                    toggleHeaderBooking();
+                }
+            }, { passive: true });
+
+            shield.addEventListener('click', () => {
+                if (!isMoving) toggleHeaderBooking();
+            });
+        });
+
+    // Sécurité supplémentaire pour Cal.com
+    window.addEventListener("message", function (e) {
+        if (e.data.origin === "Cal" || (e.data.type && e.data.type.includes("bookingSuccessful"))) {
+            setTimeout(() => { if(isHeaderOpen) toggleHeaderBooking(); }, 2500);
+        }
+    });
+</script>
+</body>
+</html>
