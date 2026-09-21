@@ -889,60 +889,80 @@ body { top: 0px !important; }
 <script>
 
 // 1. DÉVERROUILLAGE DU SON DÈS LE PREMIER TOUCHER SUR MOBILE
+
+
+
+// FONCTION QUI ISOLE LA SEULE VIDÉO VISIBLE ET ÉTEINT L'AUTRE
+function getActiveVideo() {
+    const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+    const landscapeVid = document.querySelector('.landscape-video');
+    const portraitVid = document.querySelector('.portrait-video');
+
+    if (isLandscape) {
+        // En paysage : On éteint et coupe le son du Reel mobile
+        if (portraitVid) { portraitVid.muted = true; portraitVid.pause(); }
+        return landscapeVid;
+    } else {
+        // En portrait : On éteint et coupe le son de la vidéo PC
+        if (landscapeVid) { landscapeVid.muted = true; landscapeVid.pause(); }
+        return portraitVid;
+    }
+}
+
 let audioUnlocked = false;
-
-
 
 function unlockAudioOnFirstTouch() {
     if (audioUnlocked) return;
-    
-    const videos = document.querySelectorAll('.hero-bg-video');
+
+    const activeVid = getActiveVideo();
     const icon = document.getElementById('audio-icon');
 
-    videos.forEach(v => {
-        // Tente d'activer le son
-        v.muted = false;
-        v.volume = 1.0;
-        let playPromise = v.play();
+    if (activeVid) {
+        activeVid.muted = false;
+        activeVid.volume = 1.0;
         
+        let playPromise = activeVid.play();
         if (playPromise !== undefined) {
             playPromise.then(() => {
-                // Succès : le son est autorisé
                 audioUnlocked = true;
                 if (icon) icon.setAttribute('data-feather', 'volume-2');
                 if (window.feather) feather.replace();
             }).catch(() => {
-                // Si le navigateur bloque le son : ON FORCE LE MODE MUET POUR NE PAS FIGER L'IMAGE
-                v.muted = true;
-                v.play();
+                // Si refusé par la sécurité du navigateur : reste muet pour ne pas figer
+                activeVid.muted = true;
+                activeVid.play();
             });
         }
-    });
+    }
 
-    window.removeEventListener('click', unlockAudioOnFirstTouch);
-    window.removeEventListener('touchend', unlockAudioOnFirstTouch);
+    if (audioUnlocked) {
+        window.removeEventListener('click', unlockAudioOnFirstTouch);
+        window.removeEventListener('touchend', unlockAudioOnFirstTouch);
+        window.removeEventListener('wheel', unlockAudioOnFirstTouch);
+    }
 }
 
-// On écoute le VRAI clic ou la fin d'un tap (autorisés par Apple et Google)
+// Écoute clic, toucher tactile et molette
 window.addEventListener('click', unlockAudioOnFirstTouch, { passive: true });
 window.addEventListener('touchend', unlockAudioOnFirstTouch, { passive: true });
+window.addEventListener('wheel', unlockAudioOnFirstTouch, { passive: true });
 
-// 2. BOUTON HAUT-PARLEUR MANUEL (100% GARANTI)
+// BOUTON MANUEL
 function toggleAudio() {
-    const videos = document.querySelectorAll('.hero-bg-video');
+    const activeVid = getActiveVideo();
     const icon = document.getElementById('audio-icon');
-    
-    videos.forEach(v => {
-        v.muted = !v.muted;
-        if (!v.muted) {
-            v.volume = 1.0;
-            v.play().catch(() => { v.muted = true; v.play(); });
+
+    if (activeVid) {
+        activeVid.muted = !activeVid.muted;
+        if (!activeVid.muted) {
+            activeVid.volume = 1.0;
+            activeVid.play().catch(() => { activeVid.muted = true; activeVid.play(); });
             if (icon) icon.setAttribute('data-feather', 'volume-2');
         } else {
             if (icon) icon.setAttribute('data-feather', 'volume-x');
         }
-    });
-    if (window.feather) feather.replace();
+        if (window.feather) feather.replace();
+    }
 }
 
 // 2. Gestionnaire de Scroll par étapes
