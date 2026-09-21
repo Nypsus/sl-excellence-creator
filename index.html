@@ -770,17 +770,34 @@ body { top: 0px !important; }
         transform: translate(-50%, 0) scale(1) !important;
     }
 }
+
+
+    /* GESTION DE LA ROTATION D'ÉCRAN */
+    
+    /* Quand l'écran est en PAYSAGE (PC, ou téléphone tourné à l'horizontale) */
+    @media (orientation: landscape) {
+        .landscape-video { display: block !important; }
+        .portrait-video { display: none !important; }
+    }
+
+    /* Quand l'écran est en PORTRAIT (Téléphone tenu droit) */
+    @media (orientation: portrait) {
+        .landscape-video { display: none !important; }
+        .portrait-video { display: block !important; }
+    }
+
 </style>
 
 <div id="hero-fixed-stage">
     
     <!-- 1. VIDÉO VERSION PC (Paysage) : Visible seulement sur PC (md:block) -->
-    <video class="hero-bg-video hidden md:block" autoplay muted loop playsinline preload="auto" disablePictureInPicture>
+    <!-- 1. VIDÉO PAYSAGE (PC ou Smartphone tourné à l'horizontale) -->
+    <video class="hero-bg-video landscape-video" autoplay muted loop playsinline preload="auto" disablePictureInPicture>
         <source src="https://bronze-traditional-smelt-189.mypinata.cloud/ipfs/bafybeibvinq6ti2zhj2rms4rt3vqslwcooe56ezzn7bolxruisgc3d4wfi" type="video/mp4">
     </video>
 
-    <!-- 2. VIDÉO VERSION MOBILE (Reel 9:16) : Visible seulement sur Smartphone (md:hidden) -->
-    <video class="hero-bg-video block md:hidden" autoplay muted loop playsinline preload="auto" disablePictureInPicture>
+    <!-- 2. VIDÉO REEL VERTICAL (Smartphone tenu normalement en portrait) -->
+    <video class="hero-bg-video portrait-video" autoplay muted loop playsinline preload="auto" disablePictureInPicture>
         <source src="https://bronze-traditional-smelt-189.mypinata.cloud/ipfs/bafybeihwgucq7cc7chinxp5u6jmqqdug2xfvrs4f3y42if33ldymhmdkz4" type="video/mp4">
     </video>
 
@@ -870,6 +887,48 @@ body { top: 0px !important; }
 
 <!-- SCRIPT AVEC CONTRÔLE AUDIO + VERROU TEMPOREL ANTI-INERTIE -->
 <script>
+
+// 1. DÉVERROUILLAGE DU SON DÈS LE PREMIER TOUCHER SUR MOBILE
+let audioUnlocked = false;
+
+function unlockAudioOnFirstTouch() {
+    if (audioUnlocked) return;
+    audioUnlocked = true;
+
+    const videos = document.querySelectorAll('.hero-bg-video');
+    const icon = document.getElementById('audio-icon');
+
+    videos.forEach(v => {
+        v.muted = false;
+        v.volume = 1.0;
+        v.play().catch(() => {}); // Force la lecture sonore autorisée par le tap
+    });
+
+    if (icon) {
+        icon.setAttribute('data-feather', 'volume-2');
+        if (window.feather) feather.replace();
+    }
+
+    // Supprime l'écouteur une fois déverrouillé
+    window.removeEventListener('touchstart', unlockAudioOnFirstTouch);
+    window.removeEventListener('click', unlockAudioOnFirstTouch);
+}
+
+// Écoute le premier clic ou toucher n'importe où sur la page
+window.addEventListener('touchstart', unlockAudioOnFirstTouch, { passive: true });
+window.addEventListener('click', unlockAudioOnFirstTouch, { passive: true });
+
+// 2. RELANCE LA VIDÉO AUTOMATIQUEMENT SI ON TOURNE LE SMARTPHONE
+window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+        document.querySelectorAll('.hero-bg-video').forEach(v => {
+            if (v.offsetParent !== null) { // Si la vidéo est visible à l'écran
+                v.play().catch(() => {});
+            }
+        });
+    }, 200);
+});
+
 // 1. Fonction Audio
 function toggleAudio() {
     const videos = document.querySelectorAll('.hero-bg-video');
@@ -902,6 +961,7 @@ function toggleAudio() {
     ];
 
     function triggerStep(nextStep) {
+        unlockAudioOnFirstTouch();
         isTransitioning = true;
 
         const oldCard = cards[currentStep];
