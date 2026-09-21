@@ -891,45 +891,43 @@ body { top: 0px !important; }
 // 1. DÉVERROUILLAGE DU SON DÈS LE PREMIER TOUCHER SUR MOBILE
 let audioUnlocked = false;
 
+
+
 function unlockAudioOnFirstTouch() {
     if (audioUnlocked) return;
-    audioUnlocked = true;
-
+    
     const videos = document.querySelectorAll('.hero-bg-video');
     const icon = document.getElementById('audio-icon');
 
     videos.forEach(v => {
+        // Tente d'activer le son
         v.muted = false;
         v.volume = 1.0;
-        v.play().catch(() => {}); // Force la lecture sonore autorisée par le tap
+        let playPromise = v.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                // Succès : le son est autorisé
+                audioUnlocked = true;
+                if (icon) icon.setAttribute('data-feather', 'volume-2');
+                if (window.feather) feather.replace();
+            }).catch(() => {
+                // Si le navigateur bloque le son : ON FORCE LE MODE MUET POUR NE PAS FIGER L'IMAGE
+                v.muted = true;
+                v.play();
+            });
+        }
     });
 
-    if (icon) {
-        icon.setAttribute('data-feather', 'volume-2');
-        if (window.feather) feather.replace();
-    }
-
-    // Supprime l'écouteur une fois déverrouillé
-    window.removeEventListener('touchstart', unlockAudioOnFirstTouch);
     window.removeEventListener('click', unlockAudioOnFirstTouch);
+    window.removeEventListener('touchend', unlockAudioOnFirstTouch);
 }
 
-// Écoute le premier clic ou toucher n'importe où sur la page
-window.addEventListener('touchstart', unlockAudioOnFirstTouch, { passive: true });
+// On écoute le VRAI clic ou la fin d'un tap (autorisés par Apple et Google)
 window.addEventListener('click', unlockAudioOnFirstTouch, { passive: true });
+window.addEventListener('touchend', unlockAudioOnFirstTouch, { passive: true });
 
-// 2. RELANCE LA VIDÉO AUTOMATIQUEMENT SI ON TOURNE LE SMARTPHONE
-window.addEventListener('orientationchange', () => {
-    setTimeout(() => {
-        document.querySelectorAll('.hero-bg-video').forEach(v => {
-            if (v.offsetParent !== null) { // Si la vidéo est visible à l'écran
-                v.play().catch(() => {});
-            }
-        });
-    }, 200);
-});
-
-// 1. Fonction Audio
+// 2. BOUTON HAUT-PARLEUR MANUEL (100% GARANTI)
 function toggleAudio() {
     const videos = document.querySelectorAll('.hero-bg-video');
     const icon = document.getElementById('audio-icon');
@@ -938,9 +936,10 @@ function toggleAudio() {
         v.muted = !v.muted;
         if (!v.muted) {
             v.volume = 1.0;
-            icon.setAttribute('data-feather', 'volume-2');
+            v.play().catch(() => { v.muted = true; v.play(); });
+            if (icon) icon.setAttribute('data-feather', 'volume-2');
         } else {
-            icon.setAttribute('data-feather', 'volume-x');
+            if (icon) icon.setAttribute('data-feather', 'volume-x');
         }
     });
     if (window.feather) feather.replace();
@@ -961,7 +960,7 @@ function toggleAudio() {
     ];
 
     function triggerStep(nextStep) {
-        unlockAudioOnFirstTouch();
+        
         isTransitioning = true;
 
         const oldCard = cards[currentStep];
