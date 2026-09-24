@@ -89,9 +89,9 @@ window.SLX_CONFIG = {
     email: "contact@sl-excellence.com",            // adresse de contact du studio
     whatsapp: "34602199293",                      // lien wa.me
     instagram: "https://www.instagram.com/sl_excellence/", // URL complète du profil
-    elevenLabsApiKey: "",                         // TODO: clé ElevenLabs (démo — proxifier en prod)
+    elevenLabsApiKey: "",                         // optionnel — voix premium ElevenLabs (proxifier en prod)
     elevenVoiceIds: { en: "", fr: "", es: "" },   // TODO: IDs de voix
-    voiceDemoUrls: { en: "", fr: "", es: "" },    // TODO: MP3 pré-générés (prioritaire)
+    voiceDemoUrls: { en: "", fr: "", es: "" },    // recommandé — MP3 de tes vraies voix (prioritaire sur tout)
     vapiPublicKey: "",                            // TODO
     vapiAssistantId: "",                          // TODO
     calLink: ""                                   // TODO: ex "sl-excellence/discovery"
@@ -103,14 +103,15 @@ window.SLX_CONFIG = {
 | `email` | Liens « Email » (section Contact + panneau Concierge) et repli `mailto:` du formulaire | votre boîte studio |
 | `whatsapp` | Liens WhatsApp (footer, contact, concierge) au format international **sans `+`** | votre numéro |
 | `instagram` | Liens Instagram (footer + contact). **URL complète** (ex. `https://www.instagram.com/monprofil/`) ; vide = lien `#` | URL du profil |
-| `elevenLabsApiKey` | Active la génération de voix à la volée (démo uniquement) | dashboard ElevenLabs |
+| `elevenLabsApiKey` | **Optionnel** — voix premium à la volée. Sans clé : voix système gratuites (EN/FR/ES) | dashboard ElevenLabs |
 | `elevenVoiceIds` | IDs des 3 voix (EN/FR/ES) | dashboard ElevenLabs → Voices |
 | `voiceDemoUrls` | **Prioritaire** : 3 MP3 pré-générés à servir depuis votre hébergement | vos fichiers |
 | `vapiPublicKey` / `vapiAssistantId` | Active le concierge vocal IA (bouton flottant bas droite) | dashboard Vapi |
 | `calLink` | Active l'embed Cal.com dans la section Contact | Cal.com → Event type |
 
 **Rien n'est jamais « mort » :** sans clé, le site reste 100 % fonctionnel —
-le lecteur de voix passe en *mode démo* (toast discret), et le concierge affiche les canaux directs.
+le lecteur de voix utilise les *voix système gratuites du navigateur* (EN/FR/ES),
+et le concierge affiche les canaux directs.
 
 ---
 
@@ -149,17 +150,22 @@ rattachée au filtre « Lifestyle » car aucun onglet « Experiences » n'est pr
 
 ---
 
-## 4. Lecteur multilingue (ElevenLabs) — 3 chemins de lecture
+## 4. Lecteur multilingue (voix) — 3 chemins de lecture
 
 Au clic sur 🇬🇧 / 🇫🇷 / 🇪🇸 :
 
 1. **`voiceDemoUrls[lang]` renseigné** → lecture du MP3 pré-généré (chemin recommandé en production :
-   aucun coût d'API, aucune clé exposée).
+   tes vraies voix, aucun coût d'API, aucune clé exposée).
 2. Sinon, **`elevenLabsApiKey` + `elevenVoiceIds[lang]` renseignés** → appel direct
    `POST https://api.elevenlabs.io/v1/text-to-speech/{voiceId}/stream` avec l'en-tête `xi-api-key`,
-   réponse `audio/mpeg` jouée via un Blob.
-3. Sinon → **mode démo** : oscillateur Web Audio discret + visualiseur animé + toast
-   `Demo mode — connect your ElevenLabs key in SLX_CONFIG`. La vidéo du téléphone ne se fige jamais.
+   réponse `audio/mpeg` jouée via un Blob (voix premium ElevenLabs).
+3. Sinon → **voix système gratuites du navigateur** (`speechSynthesis` : une voix native par langue,
+   aucun compte requis) + visualiseur animé ; si aucune voix n'existe : oscillateur discret en dernier
+   recours. La vidéo du téléphone ne se fige jamais.
+
+> 💡 **Sans aucune clé**, la démo vocale fonctionne déjà en EN/FR/ES (voix système, qualité selon
+> l'appareil). Pour des voix premium : enregistre tes propres MP3 — tu es trilingue, c'est ton
+> meilleur atout — et pointe-les dans `voiceDemoUrls`.
 
 > ⚠️ **Sécurité — chemin 2 :** appeler l'API ElevenLabs depuis le navigateur expose la clé API à tous les
 > visiteurs. C'est acceptable **uniquement pour une démo**. En production, générez les MP3 en amont

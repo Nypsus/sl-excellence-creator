@@ -287,12 +287,12 @@
             background: linear-gradient(90deg, rgba(2, 12, 27, 0.55), rgba(2, 12, 27, 0.2) 50%, rgba(2, 12, 27, 0.55));
             padding: 0.9rem 0;
         }
-        /* Masque anti-collision : le rail gauche (« Explore Network ») et le bord
-           droit restent lisibles, le bandeau s'efface par fondu sur les côtés */
+        /* Masque anti-collision : le texte ne glisse plus jamais sous le rail
+           gauche (coupe nette ~64 px) et s'éteint avant le bord droit */
         .marquee-mask {
             overflow: hidden;
-            -webkit-mask-image: linear-gradient(to right, transparent 0, transparent 68px, #000 168px, #000 calc(100% - 88px), transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0, transparent 68px, #000 168px, #000 calc(100% - 88px), transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0, transparent 54px, #000 74px, #000 calc(100% - 110px), transparent calc(100% - 16px));
+            mask-image: linear-gradient(to right, transparent 0, transparent 54px, #000 74px, #000 calc(100% - 110px), transparent calc(100% - 16px));
         }
         .marquee-track {
             display: flex;
@@ -303,8 +303,8 @@
         /* Mobile : le rail est masqué, on réduit donc le fondu gauche */
         @media (max-width: 767px) {
             .marquee-mask {
-                -webkit-mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 60px), transparent 100%);
-                mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 60px), transparent 100%);
+                -webkit-mask-image: linear-gradient(to right, transparent 0, #000 32px, #000 calc(100% - 64px), transparent calc(100% - 12px));
+                mask-image: linear-gradient(to right, transparent 0, #000 32px, #000 calc(100% - 64px), transparent calc(100% - 12px));
             }
         }
         .marquee-group {
@@ -2487,8 +2487,9 @@
 
             // Efface la ligne indicatrice dès le premier scroll
             const promptLine = document.getElementById('scroll-prompt-line');
-            if (promptLine && nextStep > 0) {
-                promptLine.style.opacity = '0';
+            if (promptLine) {
+                // Deux sens : la ligne revient quand on remonte aux cartes précédentes
+                promptLine.style.opacity = (nextStep > 0) ? '0' : '1';
             }
 
             setTimeout(() => {
@@ -2505,7 +2506,20 @@
 
         // --- Molette PC ---
         window.addEventListener('wheel', function(e) {
-            if (heroReleased) return;
+            if (heroReleased) {
+                // Tout en haut de page : un geste vers le haut réarme le hero
+                // pour revoir les cartes en sens inverse (parcours bidirectionnel).
+                if (window.scrollY <= 2 && e.deltaY < 0) {
+                    reEngageHero();
+                    if (!heroReleased) {
+                        e.preventDefault();
+                        if (Math.abs(e.deltaY) >= 25 && !isTransitioning && currentStep > 0) {
+                            triggerStep(currentStep - 1);
+                        }
+                    }
+                }
+                return;
+            }
             if (window.scrollY > 20) return;
 
             // Verrou strict tant que le hero n'est pas terminé
@@ -2576,8 +2590,21 @@
             try { window.dispatchEvent(new CustomEvent('slx:hero-released', { detail: {} })); } catch (e) {}
         }
 
+        // --- Parcours dans les DEUX SENS : revenu en haut de page, le hero
+        //     se réarme (verrou + gestes) pour revoir les cartes en inverse. ---
+        function reEngageHero() {
+            if (!heroReleased) return;
+            if (window.scrollY > 2) return;
+            heroReleased = false;
+            htmlEl.classList.add('hero-lock');
+            if (window.__slxLenis && typeof window.__slxLenis.stop === 'function') {
+                try { window.__slxLenis.stop(); } catch (e) {}
+            }
+        }
+
         window.addEventListener('scroll', function() {
-            if (!heroReleased && window.scrollY > 20) releaseHeroQuiet();
+            if (!heroReleased && window.scrollY > 20) { releaseHeroQuiet(); return; }
+            if (heroReleased && window.scrollY <= 2) reEngageHero();
         }, { passive: true });
 
         window.addEventListener('hashchange', function() {
@@ -2611,9 +2638,9 @@
         email: "contact@sl-excellence.com",            // adresse de contact du studio
         whatsapp: "34602199293",                      // lien wa.me
         instagram: "https://www.instagram.com/sl_excellence/", // URL complète : utilisée telle quelle dans les href
-        elevenLabsApiKey: "",                         // TODO: clé ElevenLabs (démo — proxifier en prod)
+        elevenLabsApiKey: "",                         // optionnel — voix premium ElevenLabs (proxifier en prod)
         elevenVoiceIds: { en: "", fr: "", es: "" },   // TODO: IDs de voix
-        voiceDemoUrls: { en: "", fr: "", es: "" },    // TODO: MP3 pré-générés (prioritaire)
+        voiceDemoUrls: { en: "", fr: "", es: "" },    // recommandé — MP3 de tes vraies voix (prioritaire sur tout)
         vapiPublicKey: "",                            // TODO
         vapiAssistantId: "",                          // TODO
         calLink: ""                                   // TODO: ex "sl-excellence/discovery"
@@ -3095,7 +3122,37 @@
             state.oscillatorLfo = null;
         }
 
+        /* ---------- Voix système du navigateur (CHEMIN 3 — gratuit, sans clé) ---------- */
+        let currentUtterance = null;
+        function speakWithSystemVoice(lang) {
+            const synth = window.speechSynthesis;
+            if (!synth || typeof SpeechSynthesisUtterance === 'undefined') return false;
+            try { synth.cancel(); } catch (e) {}
+            const u = new SpeechSynthesisUtterance(DEMO_TEXT[lang] || DEMO_TEXT.en);
+            try {
+                const voices = synth.getVoices() || [];
+                const re = (lang === 'fr') ? /^fr/i : (lang === 'es' ? /^es/i : /^en/i);
+                const v = voices.find(x => re.test(x.lang) && x.localService) || voices.find(x => re.test(x.lang));
+                if (v) u.voice = v;
+            } catch (e) {}
+            u.lang = (lang === 'fr') ? 'fr-FR' : ((lang === 'es') ? 'es-ES' : 'en-GB');
+            u.rate = 0.97;
+            u.onend = u.onerror = function () {
+                if (currentUtterance === u) {
+                    currentUtterance = null;
+                    state.playing = false;
+                    updatePlayButton();
+                }
+            };
+            currentUtterance = u;
+            try { synth.speak(u); } catch (e) { currentUtterance = null; return false; }
+            return true;
+        }
+
         function stopVoice() {
+            try {
+                if (window.speechSynthesis) { currentUtterance = null; window.speechSynthesis.cancel(); }
+            } catch (e) {}
             try { state.audio.pause(); } catch (e) {}
             stopOscillator();
             state.playing = false;
@@ -3158,17 +3215,29 @@
                     return;
                 }
 
-                // CHEMIN 3 : mode démo (aucune clé configurée) — la vidéo ne se fige jamais
+                // CHEMIN 3 : voix gratuites du navigateur (aucune clé requise)
+                if (speakWithSystemVoice(lang)) {
+                    state.synthetic = true;
+                    state.playing = true;
+                    updatePlayButton();
+                    return;
+                }
                 startDemoOscillator();
                 state.playing = true;
                 updatePlayButton();
-                showToast('Demo mode — connect your ElevenLabs key in SLX_CONFIG');
+                showToast('Voice preview unavailable in this browser');
             } catch (err) {
-                // Jamais de blocage : repli propre en mode démo
+                // Jamais de blocage : repli voix système, sinon ambiance démo
+                if (speakWithSystemVoice(lang)) {
+                    state.synthetic = true;
+                    state.playing = true;
+                    updatePlayButton();
+                    return;
+                }
                 startDemoOscillator();
                 state.playing = true;
                 updatePlayButton();
-                showToast('Demo mode — connect your ElevenLabs key in SLX_CONFIG');
+                showToast('Voice preview unavailable in this browser');
             }
         }
 
