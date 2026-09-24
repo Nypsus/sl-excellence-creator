@@ -5,11 +5,34 @@ cyber-luxe noir abyssal + or 24K, moteur scrollytelling conservé, contenu 100 %
 commentaires de code en français.
 
 - **Fichier du site :** `index.html` (un seul fichier, aucune build step)
-- **Assets :** `assets/bg-studio.jpg` — image de fond fixe du site (remplaçable par votre propre visuel ; l'ancienne image IPFS est conservée en commentaire dans le CSS `.global-bg`)
+- **Assets :** `assets/bg-studio.jpg` (fond fixe du site) et `assets/svc-01/02/03/06/07/08.jpg`
+  (visuels des cartes services, 1200×675). Les deux fichiers sont remplaçables à l'identique.
 - **Cible :** `https://creator.sl-excellence.com`
 - **Dépendances externes (CDN uniquement) :** Tailwind Play CDN, Feather Icons, Google Fonts (Montserrat),
-  SDK web Vapi (chargé uniquement si configuré), embed Cal.com (chargé uniquement si configuré).
-  Aucun React, aucun GSAP, aucun bundler.
+  GSAP + ScrollTrigger + Lenis (couche d'animations v2), SDK web Vapi (chargé uniquement si configuré),
+  embed Cal.com (chargé uniquement si configuré). Aucun React, aucun bundler, aucune build step.
+
+---
+
+## 0. Nouveautés v2 (résumé)
+
+- **Cartes services :** chaque carte de `#services` a désormais une bande média en haut de carte
+  (`assets/svc-01/02/03/06/07/08.jpg`). Les cartes 04 et 05, sans photo disponible, affichent un
+  panneau graphique doré avec icône. Pour changer un visuel : remplacer le fichier ou le `src`
+  dans l'`<article class="service-card">` correspondant.
+- **Portfolio :** les cartes sans vidéo (`video: null`) affichent une **affiche typographique dorée**
+  (catégorie en haut, titre centré, badge « In production » en bas) — plus aucune case noire.
+  Un clic n'ouvre jamais de lightbox vide : il affiche le message discret « In production — coming soon ».
+- **Offres :** la 3e carte devient **Signature Partnership** (`from $1,900 / month` — un jour de production
+  par saison, soit 4 par an, plus un drop mensuel de 4 vidéos). Les packs 1 et 2 sont inchangés.
+- **Contact & réseaux :** `contact@sl-excellence.com`, Instagram `sl_excellence`, TikTok `@nypsuss`
+  (logo SVG officiel au lieu de l'icône Feather), YouTube retiré. Il ne reste **aucun `href="#"`** dans la page.
+- **Bandeau défilant :** masque en fondu à gauche (le rail « Explore Network » reste lisible) et à droite.
+- **Couche d'animations « nouvelle génération » :** GSAP + ScrollTrigger + Lenis via CDN — en-têtes de
+  section animés, grilles en cascade, parallaxe douce, tilt 3D des cartes, boutons magnétiques, barre de
+  progression de page, ancres fluides, ligne du process qui se remplit. Elle se branche sur l'événement
+  `slx:hero-released` émis par le moteur du hero (qui n'est **jamais** modifié) et respecte
+  `prefers-reduced-motion` (si l'utilisateur réduit les animations, rien n'est initialisé).
 
 ---
 
@@ -63,9 +86,9 @@ Tout se passe dans **un seul bloc**, en haut du fichier (chercher `window.SLX_CO
 
 ```js
 window.SLX_CONFIG = {
-    email: "hello@sl-excellence.com",             // TODO: adresse réelle
+    email: "contact@sl-excellence.com",            // adresse de contact du studio
     whatsapp: "34602199293",                      // lien wa.me
-    instagram: "",                                // TODO: lien
+    instagram: "https://www.instagram.com/sl_excellence/", // URL complète du profil
     elevenLabsApiKey: "",                         // TODO: clé ElevenLabs (démo — proxifier en prod)
     elevenVoiceIds: { en: "", fr: "", es: "" },   // TODO: IDs de voix
     voiceDemoUrls: { en: "", fr: "", es: "" },    // TODO: MP3 pré-générés (prioritaire)
@@ -79,7 +102,7 @@ window.SLX_CONFIG = {
 |---|---|---|
 | `email` | Liens « Email » (section Contact + panneau Concierge) et repli `mailto:` du formulaire | votre boîte studio |
 | `whatsapp` | Liens WhatsApp (footer, contact, concierge) au format international **sans `+`** | votre numéro |
-| `instagram` | Active les liens Instagram (footer + contact). Vide = lien `#` | URL du profil |
+| `instagram` | Liens Instagram (footer + contact). **URL complète** (ex. `https://www.instagram.com/monprofil/`) ; vide = lien `#` | URL du profil |
 | `elevenLabsApiKey` | Active la génération de voix à la volée (démo uniquement) | dashboard ElevenLabs |
 | `elevenVoiceIds` | IDs des 3 voix (EN/FR/ES) | dashboard ElevenLabs → Voices |
 | `voiceDemoUrls` | **Prioritaire** : 3 MP3 pré-générés à servir depuis votre hébergement | vos fichiers |
@@ -108,9 +131,9 @@ Le portfolio est **data-driven** : tout est dans le tableau `PORTFOLIO` (script 
 
 - **Vidéo réelle** → renseigner `video` (MP4 direct, IPFS, Cloudflare Stream, Bunny, etc.).
   La carte lit la vidéo **au survol** (desktop) et le **clic ouvre la lightbox** avec son.
-- **Carte poster** (dégradé noir/or + visuel typographique) → mettre `video: null`.
-  Au clic, la carte renvoie en douceur vers la section Contact. Les 4 cartes poster portent le commentaire
-  `// TODO: remplacer par une vidéo réelle`.
+- **Carte affiche** (fond or / bleu nuit, lignes diagonales + catégorie, titre, badge « In production »)
+  → mettre `video: null`. Au clic, un message discret s'affiche (jamais de lightbox vide).
+  Les 4 cartes affiche portent le commentaire `// TODO: remplacer par une vidéo réelle`.
 - **`poster`** : URL d'une image d'affiche (optionnelle) affichée avant la lecture.
 
 **Format conseillé :** vertical 9:16, 1080×1920, H.264 MP4, < 10 Mo par vidéo (hébergement externe conseillé
@@ -202,8 +225,8 @@ et ligne discrète en pied de page.
 ## 9. Checklist avant mise en ligne
 
 - [ ] `email` réel renseigné (sinon les boutons Email ouvrent une adresse fictive).
-- [ ] `instagram` renseigné (footer + contact) et liens **TikTok / YouTube** complétés
-      (chercher `TODO: lien à remplir` dans le footer).
+- [ ] `instagram` renseigné (footer + contact) — déjà pré-rempli avec `sl_excellence` ; lien **TikTok**
+      (`@nypsuss`) à confirmer. YouTube a été retiré du footer.
 - [ ] Vidéos 3 à 6 du portfolio remplacées (`// TODO: remplacer par une vidéo réelle`).
 - [ ] `voiceDemoUrls` (ou clé ElevenLabs pour la démo) + `elevenVoiceIds` renseignés.
 - [ ] `vapiPublicKey` / `vapiAssistantId` renseignés (sinon le concierge reste en mode canaux directs).
@@ -215,13 +238,18 @@ et ligne discrète en pied de page.
 
 ## 10. Notes techniques
 
-- **Moteur hero :** machine à paliers conservée (IDs/classes/fonctions d'origine) avec renfort anti-inertie —
-  un nouveau palier n'est déclenché qu'après un vrai silence gestuel (~220 ms molette, ~180 ms tactile).
-  À l'étape 4, le scroll est libéré vers `#work`.
+- **Moteur hero :** machine à paliers conservée (IDs/classes/fonctions d'origine). Tant que le hero n'est pas
+  terminé, `<html>` porte la classe `hero-lock` (barre de défilement verrouillée) ; à la libération, le moteur
+  retire cette classe, émet l'événement `slx:hero-released` (détail `{target:'#work'}`) puis laisse la main.
+  La couche d'animations écoute cet événement : elle démarre Lenis et prend le relais du défilement
+  (si elle n'est pas chargée, le moteur applique son scroll natif de secours).
 - **Audio hero :** muet par défaut ; déverrouillage au premier clic/touch ; en cas de refus navigateur le
   script reste muet **sans jamais figer** la vidéo.
 - **Motion :** `prefers-reduced-motion` coupe le bandeau défilant, les shimmers et les animations non
-  essentielles.
+  essentielles — et **désactive complètement** la couche GSAP/Lenis (le site reste alors en défilement natif).
+- **Défilement lissé :** Lenis est mis en pause pendant l'ouverture du menu latéral et de la lightbox
+  portfolio, puis relancé à la fermeture. Les liens d'ancre (`#work`, `#contact`…) sont lissés par Lenis ;
+  sans Lenis (CDN bloqué), le comportement natif du navigateur s'applique.
 - **Accessibilité :** focus visibles (liseré or), cibles tactiles ≥ 44 px, navigation clavier
   (Échap ferme menu / lightbox / panneau concierge, Entrée/Espace ouvre une carte du portfolio).
 - **Performance :** vidéos en `preload="metadata"` + lecture au survol, SDK tiers chargés uniquement si

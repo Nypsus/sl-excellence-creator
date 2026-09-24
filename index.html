@@ -287,11 +287,25 @@
             background: linear-gradient(90deg, rgba(2, 12, 27, 0.55), rgba(2, 12, 27, 0.2) 50%, rgba(2, 12, 27, 0.55));
             padding: 0.9rem 0;
         }
+        /* Masque anti-collision : le rail gauche (« Explore Network ») et le bord
+           droit restent lisibles, le bandeau s'efface par fondu sur les côtés */
+        .marquee-mask {
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(to right, transparent 0, transparent 68px, #000 168px, #000 calc(100% - 88px), transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, transparent 68px, #000 168px, #000 calc(100% - 88px), transparent 100%);
+        }
         .marquee-track {
             display: flex;
             width: max-content;
             animation: marquee-scroll 46s linear infinite;
             will-change: transform;
+        }
+        /* Mobile : le rail est masqué, on réduit donc le fondu gauche */
+        @media (max-width: 767px) {
+            .marquee-mask {
+                -webkit-mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 60px), transparent 100%);
+                mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 60px), transparent 100%);
+            }
         }
         .marquee-group {
             display: flex;
@@ -371,15 +385,19 @@
             background: linear-gradient(to top, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.55) 38%, rgba(0, 0, 0, 0.12) 68%, rgba(0, 0, 0, 0.38) 100%);
         }
 
-        /* Visuel typographique des cartes « poster » (aucun texte de type placeholder) */
+        /* Affiche typographique dorée des cartes sans vidéo
+           (même hauteur que les cartes vidéo : aspect-ratio de .work-card) */
         .work-poster {
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            padding: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
             background:
-                radial-gradient(120% 90% at 82% 0%, rgba(246, 226, 122, 0.16) 0%, rgba(2, 12, 27, 0) 55%),
-                linear-gradient(160deg, #0a0a0a 0%, #050505 58%, #0b0903 100%);
+                repeating-linear-gradient(115deg, rgba(246, 226, 122, 0.055) 0px, rgba(246, 226, 122, 0.055) 1px, transparent 1px, transparent 22px),
+                radial-gradient(120% 90% at 80% 0%, rgba(246, 226, 122, 0.18) 0%, rgba(2, 12, 27, 0) 58%),
+                linear-gradient(160deg, #0b1226 0%, #05070f 55%, #120d03 100%);
         }
         .work-poster::before {
             content: "";
@@ -387,41 +405,52 @@
             inset: 14px;
             border: 1px solid rgba(246, 226, 122, 0.22);
             clip-path: var(--bevel);
+            pointer-events: none;
         }
-        .work-poster .wp-mark {
+        /* Catégorie en haut */
+        .work-poster .work-poster-cat {
             position: absolute;
-            top: 1.6rem;
-            left: 1.6rem;
-            font-size: 11px;
+            top: 1.5rem;
+            left: 0;
+            right: 0;
+            padding: 0 1.4rem;
+            font-size: 10px;
             font-weight: 900;
-            letter-spacing: 0.4em;
+            letter-spacing: 0.32em;
             text-transform: uppercase;
-            color: rgba(246, 226, 122, 0.7);
+            color: rgba(246, 226, 122, 0.72);
         }
-        /* Visuel typographique des cartes « poster » :
-           grand mot de catégorie en contour or (aucun texte de type placeholder) */
-        .work-poster .wp-word {
-            position: absolute;
-            top: 4.6rem;
-            left: 1.6rem;
-            right: 1.6rem;
-            font-size: 2.1rem;
-            line-height: 1;
+        /* Titre centré, en or */
+        .work-poster .work-poster-title {
+            font-size: 1.7rem;
+            line-height: 1.08;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: -0.02em;
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(246, 226, 122, 0.5);
-            opacity: 0.92;
+            letter-spacing: -0.01em;
+            color: #f6e27a;
+            text-shadow: 0 0 26px rgba(246, 226, 122, 0.28);
         }
-        .work-poster .wp-rule {
+        /* Badge « In production » en bas */
+        .work-poster .work-poster-tag {
             position: absolute;
-            top: 7.9rem;
-            left: 1.6rem;
-            width: 64px;
-            height: 1px;
-            background: linear-gradient(90deg, #f6e27a, transparent);
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.4rem 0.85rem;
+            border: 1px solid rgba(246, 226, 122, 0.35);
+            border-radius: 999px;
+            background: rgba(2, 12, 27, 0.6);
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: rgba(246, 226, 122, 0.85);
+            white-space: nowrap;
         }
+        /* Les affiches portent déjà catégorie / titre / badge : on masque
+           les surcouches standard pour éviter les doublons et les collisions */
+        .work-card.is-poster .work-tag,
+        .work-card.is-poster .work-copy { display: none; }
 
         .work-tag {
             position: absolute;
@@ -566,6 +595,48 @@
         }
         .service-card p { font-size: 0.85rem; line-height: 1.6; color: #c9c9c9; }
         .service-card .svc-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
+
+        /* Bande média des cartes services (photo ou panneau graphique doré) */
+        .svc-media {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin: 0 0 1.15rem;
+            aspect-ratio: 16 / 9;
+        }
+        .svc-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: saturate(1.05) brightness(0.92);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-card:hover .svc-media img { transform: scale(1.06); }
+        /* Voile de lisibilité — uniquement sur les visuels photo */
+        .svc-media:not(.is-graphic)::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(2, 12, 27, 0) 45%, rgba(2, 12, 27, 0.55) 100%);
+            pointer-events: none;
+        }
+        /* Panneau graphique doré (cartes sans photo : 04 et 05) */
+        .svc-media.is-graphic {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f6e27a;
+            background:
+                radial-gradient(120% 160% at 20% 0%, rgba(212, 175, 55, 0.22), rgba(2, 12, 27, 0.65) 60%),
+                linear-gradient(135deg, #0a0f1e, #050505);
+        }
+        .svc-media.is-graphic i, .svc-media.is-graphic svg { filter: drop-shadow(0 0 12px rgba(246, 226, 122, 0.35)); }
+        /* Carte 08 (bandeau pleine largeur) : bande intégrée à la ligne flex */
+        .svc-media.is-wide { flex: none; width: 260px; margin: 0; }
+        @media (max-width: 767px) {
+            .svc-media.is-wide { width: 100%; }
+        }
 
         /* ---------- 7. SOUND / MULTILINGUE (#sound) ---------- */
         .phone-shell {
@@ -1262,6 +1333,10 @@
          (moteur conservé à l'identique — voir script en bas de page)
          ========================================================== -->
     <style>
+        /* Verrou de la barre de défilement pendant le hero — libéré à l'étape 4 */
+        html.hero-lock { overflow: hidden; }
+        html.hero-lock body { padding-right: var(--slx-sbw, 0px); }
+
         #hero-fixed-stage {
             position: relative;
             width: 100%;
@@ -1502,6 +1577,8 @@
          BANDEAU DÉFILANT — secteurs couverts (juste après le hero)
          ============================================================ -->
     <div class="marquee" aria-hidden="true">
+        <!-- Masque anti-collision : le bandeau s'efface sous le rail gauche et sur le bord droit -->
+        <div class="marquee-mask">
         <div class="marquee-track">
             <div class="marquee-group">
                 <span class="marquee-item">Travel &amp; Resorts</span><span class="marquee-sep">◆</span>
@@ -1536,6 +1613,7 @@
                 <span class="marquee-item">FR · EN · ES</span><span class="marquee-sep">◆</span>
             </div>
         </div>
+        </div> <!-- /.marquee-mask -->
     </div>
 
     <!-- ============================================================
@@ -1548,7 +1626,7 @@
             <!-- En-tête de section -->
             <div class="max-w-3xl mb-12 reveal">
                 <span class="eyebrow">The Work</span>
-                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-5">Stories that sell the stay.</h2>
+                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-5">Stories that sell the stay</h2>
                 <p class="text-gray-300 leading-relaxed max-w-2xl text-sm md:text-base">
                     Short-form video built for how travelers decide — native to TikTok, Reels and Shorts, engineered to perform in paid.
                 </p>
@@ -1586,7 +1664,7 @@
 
             <div class="max-w-3xl mb-14 reveal">
                 <span class="eyebrow">Capabilities</span>
-                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-5">One shoot. Every asset your campaign needs.</h2>
+                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-5">One shoot<br>Every asset your campaign needs</h2>
                 <p class="text-gray-300 leading-relaxed max-w-2xl text-sm md:text-base">
                     Vertical-first, 4K, ad-ready — created on location with zero guest disruption.
                 </p>
@@ -1596,6 +1674,8 @@
 
                 <!-- 01 — UGC Video Ads (carte large) -->
                 <article class="service-card lg:col-span-7 reveal">
+                    <!-- Visuel : piscine à débordement face à l'océan -->
+                    <div class="svc-media"><img src="assets/svc-01.jpg" alt="Infinity pool overlooking the ocean — sample footage" loading="lazy"></div>
                     <div class="svc-head">
                         <span class="svc-index">01</span>
                         <i data-feather="video" class="svc-icon w-5 h-5"></i>
@@ -1609,6 +1689,8 @@
 
                 <!-- 02 — Hotel & Resort Films -->
                 <article class="service-card lg:col-span-5 reveal">
+                    <!-- Visuel : pavillons et villas du resort -->
+                    <div class="svc-media"><img src="assets/svc-02.jpg" alt="Resort pavilions and pool villas — sample footage" loading="lazy"></div>
                     <div class="svc-head">
                         <span class="svc-index">02</span>
                         <i data-feather="film" class="svc-icon w-5 h-5"></i>
@@ -1622,6 +1704,8 @@
 
                 <!-- 03 — Food & Dining Reels -->
                 <article class="service-card lg:col-span-4 reveal">
+                    <!-- Visuel : salle de restaurant dressée -->
+                    <div class="svc-media"><img src="assets/svc-03.jpg" alt="Restaurant dining room set for service — sample footage" loading="lazy"></div>
                     <div class="svc-head">
                         <span class="svc-index">03</span>
                         <i data-feather="coffee" class="svc-icon w-5 h-5"></i>
@@ -1635,6 +1719,8 @@
 
                 <!-- 04 — Product Demos & Unboxings -->
                 <article class="service-card lg:col-span-4 reveal">
+                    <!-- Panneau graphique doré (pas de photo disponible) -->
+                    <div class="svc-media is-graphic"><i data-feather="package" class="w-10 h-10"></i></div>
                     <div class="svc-head">
                         <span class="svc-index">04</span>
                         <i data-feather="package" class="svc-icon w-5 h-5"></i>
@@ -1648,6 +1734,8 @@
 
                 <!-- 05 — Talking-Head & Voice-Over -->
                 <article class="service-card lg:col-span-4 reveal">
+                    <!-- Panneau graphique doré (pas de photo disponible) -->
+                    <div class="svc-media is-graphic"><i data-feather="mic" class="w-10 h-10"></i></div>
                     <div class="svc-head">
                         <span class="svc-index">05</span>
                         <i data-feather="mic" class="svc-icon w-5 h-5"></i>
@@ -1661,6 +1749,8 @@
 
                 <!-- 06 — Travel & Destination Content -->
                 <article class="service-card lg:col-span-5 reveal">
+                    <!-- Visuel : feuillage tropical de la propriété -->
+                    <div class="svc-media"><img src="assets/svc-06.jpg" alt="Tropical foliage around the property — sample footage" loading="lazy"></div>
                     <div class="svc-head">
                         <span class="svc-index">06</span>
                         <i data-feather="map-pin" class="svc-icon w-5 h-5"></i>
@@ -1674,6 +1764,8 @@
 
                 <!-- 07 — Short-Form Ad Variations -->
                 <article class="service-card lg:col-span-7 reveal">
+                    <!-- Visuel : lounge de villa à l'heure dorée -->
+                    <div class="svc-media"><img src="assets/svc-07.jpg" alt="Villa lounge at golden hour — sample footage" loading="lazy"></div>
                     <div class="svc-head">
                         <span class="svc-index">07</span>
                         <i data-feather="layers" class="svc-icon w-5 h-5"></i>
@@ -1688,6 +1780,8 @@
                 <!-- 08 — Photo Packs (bandeau pleine largeur : échelle différente) -->
                 <article class="service-card lg:col-span-12 reveal">
                     <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <!-- Visuel : dining au crépuscule (largeur fixe, intégré à la ligne flex) -->
+                        <div class="svc-media is-wide"><img src="assets/svc-08.jpg" alt="Dining terrace at dusk — sample footage" loading="lazy"></div>
                         <div class="svc-head md:mb-0" style="margin-bottom:0;">
                             <span class="svc-index">08</span>
                             <i data-feather="camera" class="svc-icon w-5 h-5"></i>
@@ -1715,7 +1809,7 @@
 
             <div class="max-w-3xl mb-14 reveal">
                 <span class="eyebrow">Sound On</span>
-                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-5">One master film. Three native voices.</h2>
+                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-5">One master film<br>Three native voices</h2>
                 <p class="text-gray-300 leading-relaxed max-w-2xl text-sm md:text-base">
                     Preview how your property speaks to a French, English or Spanish traveler — the same story, in their language.
                 </p>
@@ -1772,7 +1866,7 @@
 
             <div class="max-w-3xl mb-16 reveal">
                 <span class="eyebrow">The Process</span>
-                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4">From brief to broadcast — fast.</h2>
+                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4">From brief to broadcast</h2>
             </div>
 
             <ol class="process-list">
@@ -1814,7 +1908,7 @@
             <!-- Colonne texte (compose à gauche, pas centré) -->
             <div class="lg:col-span-7 reveal">
                 <span class="eyebrow">The Studio</span>
-                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-6">Built for hospitality. Native to social.</h2>
+                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-6">Built for hospitality<br>Native to social</h2>
                 <p class="text-gray-300 leading-relaxed text-sm md:text-base max-w-2xl">
                     SL Excellence Creative Studio is a trilingual content studio (FR · EN · ES) creating short-form video for luxury hotels, resorts and travel brands. We film on location — phone-first 4K, zero disruption — and craft stories that feel like a guest's best day, not a brochure. On the road worldwide, ready when your property is.
                 </p>
@@ -1861,7 +1955,7 @@
 
             <div class="max-w-3xl mb-16 reveal">
                 <span class="eyebrow">Investment</span>
-                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-5">Choose your story.</h2>
+                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-5">Choose your story</h2>
                 <p class="text-gray-300 leading-relaxed max-w-2xl text-sm md:text-base">
                     Transparent starting rates. Every quote is scoped to your property, campaign and usage.
                 </p>
@@ -1904,17 +1998,18 @@
                     </div>
                 </div>
 
-                <!-- 3. Always-On Partner -->
+                <!-- 3. Partenaire saisonnier (4 jours de production / an) -->
                 <div class="price-card reveal">
-                    <p class="pc-name">Always-On Partner</p>
-                    <p class="pc-price">from $2,400 <span class="text-base font-bold" style="letter-spacing:0;">/ month</span></p>
-                    <p class="pc-desc">Fresh content every month, priority turnaround.</p>
+                    <p class="pc-name">Signature Partnership</p>
+                    <p class="pc-price">from $1,900 <span class="text-base font-bold" style="letter-spacing:0;">/ month</span></p>
+                    <p class="pc-desc">Your seasonal content partner — four production days a year, fresh assets every month.</p>
                     <ul>
-                        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>4+ videos per month</span></li>
-                        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Seasonal campaign assets</span></li>
-                        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Dedicated concepting</span></li>
-                        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Priority editing queue</span></li>
-                        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Quarterly strategy call</span></li>
+                        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>One production day per season (4 per year)</span></li>
+                        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Monthly content drop — 4 videos, cut &amp; captioned</span></li>
+                        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Seasonal campaign concepts included</span></li>
+                        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Paid usage rights included</span></li>
+                        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Priority booking &amp; turnaround</span></li>
+                        <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>Quarterly planning session</span></li>
                     </ul>
                     <div class="mt-8 pt-6 border-t border-white/10">
                         <a href="#contact" class="btn-ghost w-full">Request a quote</a>
@@ -1944,7 +2039,7 @@
 
             <div class="mb-14 reveal">
                 <span class="eyebrow">Questions</span>
-                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4">Good to know.</h2>
+                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4">Good to know</h2>
             </div>
 
             <div class="space-y-5">
@@ -1991,7 +2086,7 @@
 
             <div class="max-w-3xl mb-16 reveal">
                 <span class="eyebrow">Next Step</span>
-                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-5">Your guests are already scrolling. Let's stop them.</h2>
+                <h2 class="shimmer-gold-title text-3xl md:text-5xl uppercase tracking-tight mt-4 mb-5">Your guests are already scrolling<br>Let's stop them</h2>
                 <p class="text-gray-300 leading-relaxed max-w-2xl text-sm md:text-base">
                     Tell us about your property — you'll get a tailored proposal with concepts and rates within 48 hours.
                 </p>
@@ -2076,15 +2171,15 @@
 
                         <!-- Canaux directs -->
                         <div class="mt-6 flex flex-col gap-3">
-                            <a id="channel-whatsapp" class="channel-link" href="#" target="_blank" rel="noopener">
+                            <a id="channel-whatsapp" class="channel-link" href="https://wa.me/34602199293?text=Hello%20SL%20Excellence%20%E2%80%94%20I%27d%20like%20to%20discuss%20content%20for%20my%20property." target="_blank" rel="noopener">
                                 <i data-feather="message-circle" class="w-4 h-4"></i>
                                 <span>WhatsApp — fastest reply</span>
                             </a>
-                            <a id="channel-email" class="channel-link" href="#">
+                            <a id="channel-email" class="channel-link" href="mailto:contact@sl-excellence.com">
                                 <i data-feather="mail" class="w-4 h-4"></i>
                                 <span id="channel-email-label">Email the studio</span>
                             </a>
-                            <a id="channel-instagram" class="channel-link" href="#" target="_blank" rel="noopener">
+                            <a id="channel-instagram" class="channel-link" href="https://www.instagram.com/sl_excellence/" target="_blank" rel="noopener">
                                 <i data-feather="instagram" class="w-4 h-4"></i>
                                 <span>Instagram — latest work</span>
                             </a>
@@ -2127,17 +2222,13 @@
                 <a href="https://www.linkedin.com/in/ludovic-stoj-3778b0352/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
                     <i data-feather="linkedin" class="w-5 h-5"></i>
                 </a>
-                <!-- TODO: lien à remplir -->
-                <a href="#" class="social-link" aria-label="TikTok">
-                    <i data-feather="music" class="w-5 h-5"></i>
+                <!-- TikTok : logo officiel en SVG inline (simple-icons) -->
+                <a href="https://www.tiktok.com/@nypsuss" target="_blank" rel="noopener" class="social-link" aria-label="TikTok">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
                 </a>
-                <!-- TODO: lien à remplir -->
-                <a id="footer-instagram" href="#" class="social-link" aria-label="Instagram">
+                <!-- Instagram : rempli par SLX_CONFIG, valeur par défaut ci-dessous -->
+                <a id="footer-instagram" href="https://www.instagram.com/sl_excellence/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
                     <i data-feather="instagram" class="w-5 h-5"></i>
-                </a>
-                <!-- TODO: lien à remplir -->
-                <a href="#" class="social-link" aria-label="YouTube">
-                    <i data-feather="youtube" class="w-5 h-5"></i>
                 </a>
             </div>
 
@@ -2221,10 +2312,10 @@
                             The AI concierge is being set up — reach the studio directly in the meantime.
                         </p>
                         <div class="flex flex-col gap-3">
-                            <a id="panel-whatsapp" class="channel-link" href="#" target="_blank" rel="noopener">
+                            <a id="panel-whatsapp" class="channel-link" href="https://wa.me/34602199293?text=Hello%20SL%20Excellence%20%E2%80%94%20I%27d%20like%20to%20discuss%20content%20for%20my%20property." target="_blank" rel="noopener">
                                 <i data-feather="message-circle" class="w-4 h-4"></i><span>WhatsApp</span>
                             </a>
-                            <a id="panel-email" class="channel-link" href="#">
+                            <a id="panel-email" class="channel-link" href="mailto:contact@sl-excellence.com">
                                 <i data-feather="mail" class="w-4 h-4"></i><span>Email</span>
                             </a>
                             <a href="#contact" class="channel-link" id="panel-quote">
@@ -2332,20 +2423,15 @@
         }
     }
 
-    // 4. MACHINE À PALIERS (conservée) + RENFORT ANTI-INERTIE
-    //    - pendant une transition OU pendant que la molette « court » (momentum),
-    //      tout nouvel événement est détruit ;
-    //    - un nouveau palier n'est autorisé qu'après un vrai silence gestuel
-    //      (~220 ms sans wheel, ~180 ms sans touchmove).
+    // 4. MACHINE À PALIERS (système d'origine conservé + libération fiable)
+    //    - chaque geste (molette / swipe / clavier) fait apparaître ou disparaître
+    //      une sous-section ; un geste pendant une transition est ignoré ;
+    //    - après la 3e carte, le geste suivant libère le scroll de la page
+    //      et déverrouille la barre de défilement (étape 4).
     (function() {
         let currentStep = 0;
         let isTransitioning = false;
-
-        let isWheelCoasting = false;
-        let coastingTimeout = null;
-
-        let isTouchCoasting = false;
-        let touchCoastingTimeout = null;
+        let heroReleased = false;
 
         const cards = [
             null,
@@ -2354,10 +2440,40 @@
             document.getElementById('step-card-3')
         ];
 
-        // Étape 4 : on libère le scroll vers la section suivante
+        // --- Verrou de la barre de défilement pendant le hero ---
+        const htmlEl = document.documentElement;
+        const sbw = window.innerWidth - htmlEl.clientWidth;
+        if (sbw > 0) htmlEl.style.setProperty('--slx-sbw', sbw + 'px');
+        if (window.scrollY <= 20) {
+            htmlEl.classList.add('hero-lock');
+        } else {
+            heroReleased = true; // page rouverte en cours de lecture : moteur dormant
+        }
+
+        // Étape 4 : libération du scroll vers la section suivante
         function releaseToWorkSection() {
+            if (heroReleased) return;
+            heroReleased = true;
+            htmlEl.classList.remove('hero-lock');
+            try { window.dispatchEvent(new CustomEvent('slx:hero-released', { detail: { target: '#work' } })); } catch (e) {}
+            if (window.__slxReleaseHandled) {
+                // Filet de sécurité : si le défilement délégué (Lenis) n'a pas bougé la page,
+                // on applique le scroll natif après un court délai.
+                setTimeout(function() {
+                    if (window.scrollY < 20) {
+                        const t = document.getElementById('work') || document.querySelector('section');
+                        if (t) {
+                            const y = t.getBoundingClientRect().top + window.scrollY;
+                            try { window.scrollTo({ top: y, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, y); }
+                        }
+                    }
+                }, 1500);
+                return;
+            }
             const nextSection = document.getElementById('work') || document.querySelector('section');
-            if (nextSection) nextSection.scrollIntoView({ behavior: 'smooth' });
+            if (!nextSection) return;
+            const y = nextSection.getBoundingClientRect().top + window.scrollY;
+            try { window.scrollTo({ top: y, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, y); }
         }
 
         function triggerStep(nextStep) {
@@ -2389,36 +2505,23 @@
 
         // --- Molette PC ---
         window.addEventListener('wheel', function(e) {
-            if (currentStep === 4 && e.deltaY > 0) return;
+            if (heroReleased) return;
             if (window.scrollY > 20) return;
 
-            // Verrou de scroll tant que le hero n'est pas terminé
-            if (currentStep < 4) {
-                e.preventDefault();
-            }
-
-            // Détection du coasting (inertie de la molette)
-            const wasCoasting = isWheelCoasting;
-            isWheelCoasting = true;
-            clearTimeout(coastingTimeout);
-            coastingTimeout = setTimeout(() => { isWheelCoasting = false; }, 220);
-
-            // Transition en cours OU molette qui court encore → événement détruit
-            if (isTransitioning || wasCoasting) return;
-
-            if (Math.abs(e.deltaY) < 25) return;
+            // Verrou strict tant que le hero n'est pas terminé
+            e.preventDefault();
 
             if (e.deltaY > 0) {
-                if (currentStep < 3) {
-                    triggerStep(currentStep + 1);
-                } else if (currentStep === 3) {
-                    currentStep = 4;
-                    releaseToWorkSection();
+                if (currentStep === 3) {
+                    // Carte 3 affichée : le geste suivant libère le scroll de la page
+                    if (!isTransitioning) releaseToWorkSection();
+                    return;
                 }
-            } else if (e.deltaY < 0 && window.scrollY <= 10) {
-                if (currentStep > 0) {
-                    triggerStep(currentStep - 1);
-                }
+                if (Math.abs(e.deltaY) < 25) return;
+                if (!isTransitioning) triggerStep(currentStep + 1);
+            } else if (e.deltaY < 0) {
+                if (Math.abs(e.deltaY) < 25) return;
+                if (!isTransitioning && currentStep > 0) triggerStep(currentStep - 1);
             }
         }, { passive: false });
 
@@ -2429,37 +2532,68 @@
         }, { passive: true });
 
         window.addEventListener('touchmove', (e) => {
-            if (currentStep === 4 && window.scrollY > 10) return;
+            if (heroReleased) return;
             if (window.scrollY > 20) return;
 
             const touchCurrentY = e.touches[0].clientY;
             const diff = touchStartY - touchCurrentY;
 
-            if (currentStep < 4) {
-                e.preventDefault();
-            }
-
-            // Silence gestuel tactile (~180 ms)
-            const wasCoasting = isTouchCoasting;
-            isTouchCoasting = true;
-            clearTimeout(touchCoastingTimeout);
-            touchCoastingTimeout = setTimeout(() => { isTouchCoasting = false; }, 180);
-
-            if (isTransitioning || wasCoasting) return;
+            e.preventDefault(); // verrou strict tant que le hero n'est pas terminé
 
             if (Math.abs(diff) > 50) {
-                if (diff > 0 && currentStep < 3) {
-                    touchStartY = touchCurrentY;
-                    triggerStep(currentStep + 1);
-                } else if (diff > 0 && currentStep === 3) {
-                    currentStep = 4;
-                    releaseToWorkSection();
-                } else if (diff < 0 && currentStep > 0 && window.scrollY <= 10) {
-                    touchStartY = touchCurrentY;
+                touchStartY = touchCurrentY;
+                if (diff > 0) {
+                    if (currentStep === 3) {
+                        if (!isTransitioning) releaseToWorkSection();
+                    } else if (!isTransitioning) {
+                        triggerStep(currentStep + 1);
+                    }
+                } else if (currentStep > 0 && !isTransitioning) {
                     triggerStep(currentStep - 1);
                 }
             }
         }, { passive: false });
+
+        // --- Clavier (accessibilité : mêmes paliers qu'à la molette) ---
+        window.addEventListener('keydown', function(e) {
+            if (heroReleased || window.scrollY > 20) return;
+            if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ' || e.key === 'Spacebar') {
+                e.preventDefault();
+                if (currentStep === 3) { if (!isTransitioning) releaseToWorkSection(); }
+                else if (!isTransitioning) triggerStep(currentStep + 1);
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                if (currentStep > 0 && !isTransitioning) triggerStep(currentStep - 1);
+            }
+        });
+
+        // --- Sécurité : toute sortie du hero par un autre chemin (ancre, menu, historique)
+        //     libère immédiatement le verrou ---
+        function releaseHeroQuiet() {
+            if (heroReleased) return;
+            heroReleased = true;
+            htmlEl.classList.remove('hero-lock');
+            try { window.dispatchEvent(new CustomEvent('slx:hero-released', { detail: {} })); } catch (e) {}
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!heroReleased && window.scrollY > 20) releaseHeroQuiet();
+        }, { passive: true });
+
+        window.addEventListener('hashchange', function() {
+            if (!heroReleased) releaseHeroQuiet();
+        });
+
+        document.addEventListener('click', function(e) {
+            if (heroReleased) return;
+            const a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+            if (!a) return;
+            const id = (a.getAttribute('href') || '').slice(1);
+            const el = id ? document.getElementById(id) : null;
+            e.preventDefault();
+            releaseHeroQuiet();
+            if (el) setTimeout(function() { el.scrollIntoView({ behavior: 'smooth' }); }, 60);
+        }, true);
     })();
     </script>
 
@@ -2474,9 +2608,9 @@
        modification de code n'est nécessaire (voir README-DEPLOY.md).
        ============================================================ */
     window.SLX_CONFIG = {
-        email: "hello@sl-excellence.com",             // TODO: adresse réelle
+        email: "contact@sl-excellence.com",            // adresse de contact du studio
         whatsapp: "34602199293",                      // lien wa.me
-        instagram: "",                                // TODO: lien
+        instagram: "https://www.instagram.com/sl_excellence/", // URL complète : utilisée telle quelle dans les href
         elevenLabsApiKey: "",                         // TODO: clé ElevenLabs (démo — proxifier en prod)
         elevenVoiceIds: { en: "", fr: "", es: "" },   // TODO: IDs de voix
         voiceDemoUrls: { en: "", fr: "", es: "" },    // TODO: MP3 pré-générés (prioritaire)
@@ -2703,24 +2837,26 @@
         // --- Rendu des cartes depuis la data ---
         PORTFOLIO.forEach((item) => {
             const card = document.createElement('article');
-            card.className = 'work-card reveal';
+            card.className = 'work-card reveal' + (item.video ? '' : ' is-poster');
             card.dataset.category = item.category;
             card.dataset.filterTags = (item.filterTags || [item.category]).join('|');
             card.setAttribute('tabindex', '0');
             card.setAttribute('role', 'button');
-            card.setAttribute('aria-label', item.video ? ('Play ' + item.title) : (item.title + ' — request this story'));
+            card.setAttribute('aria-label', item.video ? ('Play ' + item.title) : (item.title + ' — in production'));
 
+            // Cartes sans vidéo : affiche typographique dorée (jamais de case noire vide)
             const media = item.video
                 ? '<video src="' + item.video + '"' + (item.poster ? ' poster="' + item.poster + '"' : '') + ' muted loop playsinline preload="metadata"></video>'
-                : '<span class="work-poster">' +
-                      '<span class="wp-mark">SLX · 9:16</span>' +
-                      '<span class="wp-word">' + item.category + '</span>' +
-                      '<span class="wp-rule"></span>' +
-                  '</span>';
+                : '<div class="work-poster">' +
+                      '<span class="work-poster-cat">' + item.category + '</span>' +
+                      '<span class="work-poster-title">' + item.title + '</span>' +
+                      '<span class="work-poster-tag">In production</span>' +
+                  '</div>';
 
+            // Icône d'action : lecture pour les vidéos, horloge pour les affiches
             const actionIcon = item.video
                 ? '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
-                : '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>';
+                : '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>';
 
             card.innerHTML =
                 media +
@@ -2740,13 +2876,13 @@
                 card.addEventListener('mouseleave', () => { videoEl.pause(); videoEl.currentTime = 0; });
             }
 
-            // Clic : lightbox si vidéo réelle, sinon scroll doux vers #contact
+            // Clic : lightbox pour les vidéos, simple message pour les affiches
+            // (aucune lightbox vide ne doit s'ouvrir)
             const activate = () => {
                 if (item.video) {
                     openLightbox(item);
                 } else {
-                    const contact = slxEl('contact');
-                    if (contact) contact.scrollIntoView({ behavior: 'smooth' });
+                    showToast('In production — coming soon');
                 }
             };
             card.addEventListener('click', activate);
@@ -3432,6 +3568,336 @@
     (function slxInit() {
         if (window.feather) feather.replace();
         if (typeof slxInitReveal === 'function') slxInitReveal();
+    })();
+    </script>
+
+    <!-- ============================================================
+         COUCHE D'ANIMATIONS « NOUVELLE GÉNÉRATION » (v2)
+         GSAP + ScrollTrigger + Lenis (CDN, chargés sans defer).
+         Cette couche ne touche JAMAIS au moteur de scroll du hero :
+         elle écoute simplement l'événement 'slx:hero-released' et
+         prend le relais du défilement à partir de là.
+         ============================================================ -->
+    <style>
+        /* --- Barre de progression de page (2px, or) --- */
+        #slx-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            z-index: 200;
+            transform-origin: left center;
+            transform: scaleX(0);
+            background: linear-gradient(90deg, #8a6628 0%, #f6e27a 45%, #fff9d1 62%, #f6e27a 100%);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        /* --- Styles minimaux Lenis (évite un 4e fichier CDN) ---
+               Sans ces règles, le « scroll-behavior: smooth » global
+               entrerait en conflit avec le lissage de Lenis. --- */
+        html.lenis { height: auto; }
+        html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+        .lenis.lenis-stopped { overflow: hidden; }
+
+        /* --- Le système d'apparition CSS est neutralisé au profit de GSAP --- */
+        html.slx-motion .reveal { opacity: 1; transform: none; }
+
+        /* --- Les cartes animées par GSAP perdent leur transition CSS de
+               transform / opacité (GSAP écrit ces propriétés à chaque frame) ;
+               la transition de bordure et d'ombre du survol reste fluide. --- */
+        html.js.slx-motion .service-card,
+        html.js.slx-motion .price-card,
+        html.js.slx-motion .work-card,
+        html.js.slx-motion .process-step,
+        html.js.slx-motion .faq-item,
+        html.js.slx-motion .glass-panel {
+            transition-property: border-color, box-shadow;
+            transition-duration: 0.4s;
+            transition-timing-function: ease;
+        }
+
+        /* --- Ligne dorée du process : remplissage piloté par --slx-rail
+               (variable animée par GSAP, le pseudo-élément s'en sert) --- */
+        .process-list::before { transform: scaleY(var(--slx-rail, 1)); transform-origin: top center; }
+        @media (min-width: 1024px) {
+            /* Sur desktop la ligne est horizontale : même variable, axe X */
+            .process-list::before { transform: scaleX(var(--slx-rail, 1)); transform-origin: left center; }
+        }
+
+        /* --- Étape « allumée » en séquence (classe posée par ScrollTrigger) --- */
+        .process-step .step-node,
+        .process-step h3 { transition: color 0.35s ease, border-color 0.35s ease; }
+        .process-step.is-lit .step-node {
+            border-color: rgba(246, 226, 122, 0.9);
+            color: #fff9d1;
+            box-shadow: 0 0 22px rgba(246, 226, 122, 0.45);
+        }
+        .process-step.is-lit h3 { color: #f6e27a; }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+    <script>
+    /* ============================================================
+       ANIMATIONS v2 — défilement lissé (Lenis) + révélations (GSAP)
+       ------------------------------------------------------------
+       Contrat avec le hero : le moteur d'origine reste intact.
+       - il pose/retire la classe 'hero-lock' sur <html> ;
+       - il dispatche 'slx:hero-released' (detail {target:'#work'}
+         à la libération normale, {} en libération silencieuse).
+       Ici, on ne fait qu'écouter et prendre le relais.
+       ============================================================ */
+    (function slxMotion() {
+        /* ---------- Garde-fous ---------- */
+        // 1. « Réduire les animations » → on ne branche rien du tout
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        // 2. CDN indisponible → sortie silencieuse (aucune erreur console)
+        const gsap = window.gsap;
+        const ScrollTrigger = window.ScrollTrigger;
+        const Lenis = window.Lenis;
+        if (!gsap || !ScrollTrigger || !Lenis) return;
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const html = document.documentElement;
+        html.classList.add('slx-motion');
+
+        // Le hero n'est jamais animé par cette couche
+        const inHero = (el) => !!(el && el.closest && el.closest('#hero-fixed-stage'));
+        const notInHero = (el) => !inHero(el);
+        const heroLocked = () => html.classList.contains('hero-lock');
+
+        /* ---------- Lenis : défilement lissé ---------- */
+        const lenis = new Lenis({ duration: 1.1 });
+        window.__slxLenis = lenis;
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+
+        // Si la page s'ouvre sur le hero verrouillé, Lenis reste à l'arrêt ;
+        // sinon (page rouverte plus bas) il démarre immédiatement.
+        if (heroLocked() && window.scrollY <= 20) lenis.stop();
+
+        // Libération du hero par le moteur d'origine
+        window.addEventListener('slx:hero-released', (e) => {
+            lenis.start();
+            const target = e && e.detail && e.detail.target;
+            if (target) {
+                // On signale au moteur que le défilement est pris en charge
+                // (sinon il applique son scroll natif de secours).
+                window.__slxReleaseHandled = true;
+                lenis.scrollTo(target, { duration: 1.4 });
+            }
+            // La barre de défilement revient : les positions doivent être recalculées
+            requestAnimationFrame(() => ScrollTrigger.refresh());
+        });
+
+        /* ---------- (a) En-têtes de section : eyebrow → titre → texte ---------- */
+        document.querySelectorAll('section .eyebrow').forEach((eyebrow) => {
+            const block = eyebrow.closest('.reveal') || eyebrow.parentElement;
+            if (!block || inHero(block)) return;
+            const title = block.querySelector('h2');
+            const text = block.querySelector('p');
+            const tl = gsap.timeline({
+                scrollTrigger: { trigger: block, start: 'top 85%', once: true }
+            });
+            tl.from(eyebrow, { opacity: 0, x: -24, duration: 0.9, ease: 'power3.out' });
+            if (title) tl.from(title, { opacity: 0, y: 48, duration: 0.9, ease: 'power3.out' }, '-=0.7');
+            if (text) tl.from(text, { opacity: 0, y: 24, duration: 0.9, ease: 'power3.out' }, '-=0.7');
+        });
+
+        /* ---------- (b) Grilles en cascade ---------- */
+        [
+            { sel: '#services .service-card', trigger: '#services .grid' },
+            { sel: '#packages .price-card', trigger: '#packages .grid' },
+            { sel: '#work .work-card', trigger: '#work-grid' },
+            { sel: '#process .process-step', trigger: '#process .process-list' },
+            { sel: '#faq .faq-item', trigger: '#faq .space-y-5' }
+        ].forEach(({ sel, trigger }) => {
+            const els = Array.prototype.filter.call(document.querySelectorAll(sel), notInHero);
+            if (!els.length) return;
+            const container = document.querySelector(trigger) || els[0].parentElement;
+            gsap.from(els, {
+                opacity: 0,
+                y: 44,
+                duration: 0.8,
+                stagger: 0.07,
+                ease: 'power3.out',
+                scrollTrigger: { trigger: container, start: 'top 80%', once: true }
+            });
+        });
+
+        /* ---------- (c) Parallaxe douce ---------- */
+        [
+            { el: document.querySelector('#sound .bevel-frame'), from: 6, to: -6 },
+            { el: document.querySelector('#studio .glass-panel'), from: 4, to: -4 }
+        ].forEach(({ el, from, to }) => {
+            if (!el || inHero(el)) return;
+            gsap.fromTo(el, { yPercent: from }, {
+                yPercent: to,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: el.closest('section') || el,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1.2
+                }
+            });
+        });
+
+        /* ---------- (d) Marquee : léger skew selon la vélocité de scroll ---------- */
+        const marquee = document.querySelector('.marquee');
+        if (marquee) {
+            const skewTo = gsap.quickTo(marquee, 'skewX', { duration: 0.45, ease: 'power2.out' });
+            let resetTimer = null;
+            ScrollTrigger.create({
+                trigger: document.body,
+                start: 'top top',
+                end: 'bottom bottom',
+                onUpdate: (self) => {
+                    // ±6° maximum, puis retour au repos (le track CSS n'est pas touché)
+                    skewTo(gsap.utils.clamp(-6, 6, self.getVelocity() / -300));
+                    clearTimeout(resetTimer);
+                    resetTimer = setTimeout(() => skewTo(0), 160);
+                }
+            });
+        }
+
+        // Les effets de pointeur ne concernent que les souris précises
+        const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+        /* ---------- (e) Boutons magnétiques (max ~7px) ---------- */
+        if (finePointer) {
+            document.querySelectorAll('.btn-gold, .btn-ghost').forEach((btn) => {
+                if (inHero(btn)) return;
+                const xTo = gsap.quickTo(btn, 'x', { duration: 0.5, ease: 'power3.out' });
+                const yTo = gsap.quickTo(btn, 'y', { duration: 0.5, ease: 'power3.out' });
+                btn.addEventListener('mousemove', (e) => {
+                    const r = btn.getBoundingClientRect();
+                    xTo(gsap.utils.clamp(-7, 7, ((e.clientX - (r.left + r.width / 2)) / (r.width / 2)) * 7));
+                    yTo(gsap.utils.clamp(-7, 7, ((e.clientY - (r.top + r.height / 2)) / (r.height / 2)) * 7));
+                });
+                btn.addEventListener('mouseleave', () => { xTo(0); yTo(0); });
+            });
+        }
+
+        /* ---------- (f) Tilt 3D léger des cartes (±3,5° max) ---------- */
+        if (finePointer) {
+            document.querySelectorAll('.work-card, .price-card').forEach((card) => {
+                if (inHero(card)) return;
+                card.addEventListener('mousemove', (e) => {
+                    const r = card.getBoundingClientRect();
+                    const px = (e.clientX - r.left) / r.width - 0.5;
+                    const py = (e.clientY - r.top) / r.height - 0.5;
+                    // GSAP conserve les composantes de transform existantes
+                    // (utile pour la carte « Most popular », surélevée en CSS)
+                    gsap.to(card, {
+                        rotationY: px * 7,
+                        rotationX: -py * 7,
+                        transformPerspective: 900,
+                        duration: 0.5,
+                        ease: 'power2.out',
+                        overwrite: 'auto'
+                    });
+                });
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, { rotationX: 0, rotationY: 0, duration: 0.6, ease: 'power3.out', overwrite: 'auto' });
+                });
+            });
+        }
+
+        /* ---------- (g) Ligne du process : remplissage + étapes allumées ---------- */
+        const processList = document.querySelector('#process .process-list');
+        if (processList) {
+            // On anime la variable CSS --slx-rail lue par .process-list::before
+            gsap.fromTo(processList, { '--slx-rail': 0 }, {
+                '--slx-rail': 1,
+                ease: 'none',
+                scrollTrigger: { trigger: processList, start: 'top 75%', end: 'bottom 60%', scrub: 1 }
+            });
+            processList.querySelectorAll('.process-step').forEach((step) => {
+                ScrollTrigger.create({
+                    trigger: step,
+                    start: 'top 78%',
+                    onEnter: () => step.classList.add('is-lit'),
+                    onLeaveBack: () => step.classList.remove('is-lit')
+                });
+            });
+        }
+
+        /* ---------- (h) Barre de progression de page ---------- */
+        const progress = document.createElement('div');
+        progress.id = 'slx-progress';
+        progress.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(progress);
+        gsap.fromTo(progress, { scaleX: 0 }, {
+            scaleX: 1,
+            ease: 'none',
+            scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.3 }
+        });
+
+        /* ---------- (i) Contact + footer : cascade d'entrée ---------- */
+        const contactPanels = document.querySelectorAll('#contact .glass-panel');
+        if (contactPanels.length) {
+            gsap.from(contactPanels, {
+                opacity: 0, y: 40, duration: 0.85, stagger: 0.15, ease: 'power3.out',
+                scrollTrigger: { trigger: '#contact', start: 'top 75%', once: true }
+            });
+        }
+        const footerRows = document.querySelectorAll('footer .max-w-7xl > *');
+        if (footerRows.length) {
+            gsap.from(footerRows, {
+                opacity: 0, y: 28, duration: 0.7, stagger: 0.09, ease: 'power3.out',
+                scrollTrigger: { trigger: 'footer', start: 'top 92%', once: true }
+            });
+        }
+
+        /* ---------- (j) Ancres fluides ---------- */
+        // En capture : passe avant les gestionnaires internes ; si le moteur
+        // du hero a déjà traité le clic (hero verrouillé), on ne fait rien.
+        document.addEventListener('click', (e) => {
+            if (e.defaultPrevented || heroLocked()) return;
+            const link = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+            if (!link) return;
+            const href = link.getAttribute('href');
+            if (!href || href === '#') return;
+            let target = null;
+            try { target = document.querySelector(href); } catch (err) { target = null; }
+            if (!target) return;
+            e.preventDefault();
+            lenis.scrollTo(target, { duration: 1.2 });
+        }, true);
+
+        /* ---------- (k) Menu latéral + lightbox : on suspend Lenis ---------- */
+        const originalToggleMenu = window.toggleMenu;
+        if (typeof originalToggleMenu === 'function') {
+            // Enveloppe non intrusive : on appelle la fonction d'origine, puis on ajuste
+            window.toggleMenu = function () {
+                const result = originalToggleMenu.apply(this, arguments);
+                const menu = document.getElementById('side-menu');
+                if (menu && menu.classList.contains('open')) lenis.stop();
+                else if (!heroLocked()) lenis.start();
+                return result;
+            };
+        }
+
+        const lightbox = document.getElementById('work-lightbox');
+        if (lightbox && window.MutationObserver) {
+            // La lightbox n'expose pas ses fonctions : on observe son état
+            new MutationObserver(() => {
+                if (lightbox.classList.contains('open')) lenis.stop();
+                else if (!heroLocked()) lenis.start();
+            }).observe(lightbox, { attributes: true, attributeFilter: ['class'] });
+        }
+
+        /* ---------- (l) Recalcul final des positions ---------- */
+        window.addEventListener('load', () => ScrollTrigger.refresh());
     })();
     </script>
 </body>
